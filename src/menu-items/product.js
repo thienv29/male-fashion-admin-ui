@@ -1,11 +1,11 @@
 // assets
-import { IconPalette, IconTypography, IconArchive, IconRulerMeasure } from '@tabler/icons';
+import { IconPalette, IconTypography, IconArchive, IconRuler } from '@tabler/icons';
 
 // constant
 const icons = {
     IconTypography,
     IconPalette,
-    IconRulerMeasure,
+    IconRuler,
     IconArchive
 };
 
@@ -37,7 +37,7 @@ const product = {
             title: 'Size',
             type: 'item',
             url: 'product/size',
-            icon: icons.IconRulerMeasure,
+            icon: icons.IconRuler,
             breadcrumbs: false
         }
     ]
