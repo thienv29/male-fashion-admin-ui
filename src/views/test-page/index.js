@@ -16,8 +16,6 @@ const TestPage = () => {
         const res = await UserService.getAll2();
         console.log(res);
     };
-    const userRole = () => {
-    };
     return (
         <MainCard title='Sample Card'>
             <Typography variant='body2'>
