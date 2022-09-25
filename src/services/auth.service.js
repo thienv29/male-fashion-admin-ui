@@ -6,14 +6,9 @@ const AuthService = {
         return axiosClient.post('/auth/login', user);
     },
 
-    pingSe: () => {
-        // return axiosClient.get('/ping');
-        return axios.get(`http://localhost:5000/ping`);
-    },
-
     refreshToken: () => {
-        return axios.post(`http://localhost:5000/api/v1/auth/refresh-token`, {
-        },{
+        return axios.post(`/auth/refresh-token`, {
+        }, {
             baseURL: process.env.REACT_APP_API_URL,
             headers: {
                 'content-type': 'application/json',

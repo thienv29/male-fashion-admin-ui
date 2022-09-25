@@ -2,7 +2,7 @@ import axiosClient from './index';
 
 const UserService = {
     getAll: () => {
-        return axiosClient.get('/user/get-als');
+        return axiosClient.get('/user/get-all');
     },
     getAll2: () => {
         return axiosClient.get('/user/get-all-2');
