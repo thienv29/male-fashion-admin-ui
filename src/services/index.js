@@ -2,15 +2,16 @@ import axios from 'axios';
 import querystring from 'query-string';
 import { store } from '../store';
 import jwt_decode from 'jwt-decode';
-import AuthService from '../auth.service';
+import AuthService from './auth.service.js';
 import { setToken } from '../store/feature/UserSlice';
-import { notifyErrorMessage, notifyErrorSystem, notifySuccessMessage } from '../../core/utils/notify-action';
+import { notifyErrorMessage, notifyErrorSystem, notifySuccessMessage } from '../core/utils/notify-action';
 
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
         'content-type': 'application/json',
     },
+    withCredentials: true,
     paramsSerializer: params => querystring.stringify(params),
 });
 

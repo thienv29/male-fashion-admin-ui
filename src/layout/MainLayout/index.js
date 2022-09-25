@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -65,11 +65,19 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = () => {
+    const userState = useSelector((state) => state.user);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (userState.id === '') {
+            return navigate('/login');
+        }
+    }, [userState, navigate]);
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
     // Handle left drawer
     const leftDrawerOpened = useSelector((state) => state.appUI.opened);
+
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
         dispatch(setMenu(!leftDrawerOpened));

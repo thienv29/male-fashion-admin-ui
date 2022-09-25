@@ -8,12 +8,12 @@ const icons = { IconDashboard };
 
 const dashboard = {
     id: 'dashboard',
-    title: 'Dashboard',
+    title: 'Chung',
     type: 'group',
     children: [
         {
             id: 'default',
-            title: 'Dashboard',
+            title: 'Thống kê',
             type: 'item',
             url: '/',
             icon: icons.IconDashboard,

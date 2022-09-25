@@ -38,3 +38,6 @@ yarn-error.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+package-lock.json
+yarn.lock

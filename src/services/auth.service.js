@@ -1,9 +1,6 @@
-import axiosClient from './base';
-import { LoginModel } from '../models/data-model/login.model';
-import { store } from '../redux/store';
+import axiosClient from './index';
 import axios from 'axios';
 import querystring from 'query-string';
-
 const AuthService = {
     login: (user) => {
         return axiosClient.post('/auth/login', user);
@@ -15,13 +12,13 @@ const AuthService = {
     },
 
     refreshToken: () => {
-        return axios.post(`/auth/refresh-token`, {
-            refreshToken: store.getState().user.tokenRefresh,
-        }, {
+        return axios.post(`http://localhost:5000/api/v1/auth/refresh-token`, {
+        },{
             baseURL: process.env.REACT_APP_API_URL,
             headers: {
                 'content-type': 'application/json',
             },
+            withCredentials: true,
             paramsSerializer: params => querystring.stringify(params),
         });
     },
