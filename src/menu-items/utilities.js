@@ -1,11 +1,10 @@
 // assets
-import { IconTypography, IconPalette, IconShadow, IconWindmill } from '@tabler/icons';
+import { IconPalette, IconTypography, IconWindmill } from '@tabler/icons';
 
 // constant
 const icons = {
     IconTypography,
     IconPalette,
-    IconShadow,
     IconWindmill
 };
 
@@ -32,14 +31,7 @@ const utilities = {
             icon: icons.IconPalette,
             breadcrumbs: false
         },
-        {
-            id: 'util-shadow',
-            title: 'Shadow',
-            type: 'item',
-            url: '/utils/util-shadow',
-            icon: icons.IconShadow,
-            breadcrumbs: false
-        },
+
         {
             id: 'icons',
             title: 'Icons',

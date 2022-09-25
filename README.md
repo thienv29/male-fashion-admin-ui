@@ -2,8 +2,8 @@
 
 ### install lib
 
--   npm install
+- npm install
 
 ### runtime
 
--   npm run dev
+- npm run dev

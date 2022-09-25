@@ -76,12 +76,12 @@ const EarningCard = ({ isLoading }) => {
             ) : (
                 <CardWrapper border={false} content={false}>
                     <Box sx={{ p: 2.25 }}>
-                        <Grid container direction="column">
+                        <Grid container direction='column'>
                             <Grid item>
-                                <Grid container justifyContent="space-between">
+                                <Grid container justifyContent='space-between'>
                                     <Grid item>
                                         <Avatar
-                                            variant="rounded"
+                                            variant='rounded'
                                             sx={{
                                                 ...theme.typography.commonAvatar,
                                                 ...theme.typography.largeAvatar,
@@ -89,12 +89,12 @@ const EarningCard = ({ isLoading }) => {
                                                 mt: 1
                                             }}
                                         >
-                                            <img src={EarningIcon} alt="Notification" />
+                                            <img src={EarningIcon} alt='Notification' />
                                         </Avatar>
                                     </Grid>
                                     <Grid item>
                                         <Avatar
-                                            variant="rounded"
+                                            variant='rounded'
                                             sx={{
                                                 ...theme.typography.commonAvatar,
                                                 ...theme.typography.mediumAvatar,
@@ -102,19 +102,19 @@ const EarningCard = ({ isLoading }) => {
                                                 color: theme.palette.secondary[200],
                                                 zIndex: 1
                                             }}
-                                            aria-controls="menu-earning-card"
-                                            aria-haspopup="true"
+                                            aria-controls='menu-earning-card'
+                                            aria-haspopup='true'
                                             onClick={handleClick}
                                         >
-                                            <MoreHorizIcon fontSize="inherit" />
+                                            <MoreHorizIcon fontSize='inherit' />
                                         </Avatar>
                                         <Menu
-                                            id="menu-earning-card"
+                                            id='menu-earning-card'
                                             anchorEl={anchorEl}
                                             keepMounted
                                             open={Boolean(anchorEl)}
                                             onClose={handleClose}
-                                            variant="selectedMenu"
+                                            variant='selectedMenu'
                                             anchorOrigin={{
                                                 vertical: 'bottom',
                                                 horizontal: 'right'
@@ -141,9 +141,10 @@ const EarningCard = ({ isLoading }) => {
                                 </Grid>
                             </Grid>
                             <Grid item>
-                                <Grid container alignItems="center">
+                                <Grid container alignItems='center'>
                                     <Grid item>
-                                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                                        <Typography
+                                            sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
                                             $500.00
                                         </Typography>
                                     </Grid>
@@ -156,7 +157,8 @@ const EarningCard = ({ isLoading }) => {
                                                 color: theme.palette.secondary.dark
                                             }}
                                         >
-                                            <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
+                                            <ArrowUpwardIcon fontSize='inherit'
+                                                             sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
                                         </Avatar>
                                     </Grid>
                                 </Grid>

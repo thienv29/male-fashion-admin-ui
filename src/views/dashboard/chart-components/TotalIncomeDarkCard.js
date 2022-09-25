@@ -52,10 +52,10 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                 <CardWrapper border={false} content={false}>
                     <Box sx={{ p: 2 }}>
                         <List sx={{ py: 0 }}>
-                            <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
+                            <ListItem alignItems='center' disableGutters sx={{ py: 0 }}>
                                 <ListItemAvatar>
                                     <Avatar
-                                        variant="rounded"
+                                        variant='rounded'
                                         sx={{
                                             ...theme.typography.commonAvatar,
                                             ...theme.typography.largeAvatar,
@@ -63,7 +63,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                                             color: '#fff'
                                         }}
                                     >
-                                        <TableChartOutlinedIcon fontSize="inherit" />
+                                        <TableChartOutlinedIcon fontSize='inherit' />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
@@ -73,12 +73,12 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                                         mb: 0.45
                                     }}
                                     primary={
-                                        <Typography variant="h4" sx={{ color: '#fff' }}>
+                                        <Typography variant='h4' sx={{ color: '#fff' }}>
                                             $203k
                                         </Typography>
                                     }
                                     secondary={
-                                        <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
+                                        <Typography variant='subtitle2' sx={{ color: 'primary.light', mt: 0.25 }}>
                                             Total Income
                                         </Typography>
                                     }

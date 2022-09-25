@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
@@ -24,8 +24,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 // project imports
 import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import { SET_BORDER_RADIUS, SET_FONT_FAMILY } from 'store/actions';
-import { gridSpacing } from 'store/constant';
+import { gridSpacing } from '../../core/constant/theme';
+import { setBorderRadius, setFontFamily } from '../../store/feature/AppUiSlice';
 
 // concat 'px'
 function valueText(value) {
@@ -37,26 +37,34 @@ function valueText(value) {
 const Customization = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const customization = useSelector((state) => state.customization);
-
-    // drawer on/off
+    const appUI = useSelector((state) => state.appUI);
     const [open, setOpen] = useState(false);
     const handleToggle = () => {
         setOpen(!open);
     };
 
-    // state - border radius
-    const [borderRadius, setBorderRadius] = useState(customization.borderRadius);
     const handleBorderRadius = (event, newValue) => {
-        setBorderRadius(newValue);
+        dispatch(setBorderRadius(newValue));
+    };
+    const handleFont= (event, newValue) => {
+        let newFont;
+        switch (newValue) {
+            case 'Inter':
+                newFont = `'Inter', sans-serif`;
+                break;
+            case 'Poppins':
+                newFont = `'Poppins', sans-serif`;
+                break;
+            case 'Roboto':
+            default:
+                newFont = `'Roboto', sans-serif`;
+                break;
+        }
+        dispatch(setFontFamily(newFont));
     };
 
-    useEffect(() => {
-        dispatch({ type: SET_BORDER_RADIUS, borderRadius });
-    }, [dispatch, borderRadius]);
-
     let initialFont;
-    switch (customization.fontFamily) {
+    switch (appUI.fontFamily) {
         case `'Inter', sans-serif`:
             initialFont = 'Inter';
             break;
@@ -69,35 +77,17 @@ const Customization = () => {
             break;
     }
 
-    // state - font family
-    const [fontFamily, setFontFamily] = useState(initialFont);
-    useEffect(() => {
-        let newFont;
-        switch (fontFamily) {
-            case 'Inter':
-                newFont = `'Inter', sans-serif`;
-                break;
-            case 'Poppins':
-                newFont = `'Poppins', sans-serif`;
-                break;
-            case 'Roboto':
-            default:
-                newFont = `'Roboto', sans-serif`;
-                break;
-        }
-        dispatch({ type: SET_FONT_FAMILY, fontFamily: newFont });
-    }, [dispatch, fontFamily]);
 
     return (
         <>
             {/* toggle button */}
-            <Tooltip title="Live Customize">
+            <Tooltip title='Live Customize'>
                 <Fab
-                    component="div"
+                    component='div'
                     onClick={handleToggle}
-                    size="medium"
-                    variant="circular"
-                    color="secondary"
+                    size='medium'
+                    variant='circular'
+                    color='secondary'
                     sx={{
                         borderRadius: 0,
                         borderTopLeftRadius: '50%',
@@ -110,8 +100,8 @@ const Customization = () => {
                         zIndex: theme.zIndex.speedDial
                     }}
                 >
-                    <AnimateButton type="rotate">
-                        <IconButton color="inherit" size="large" disableRipple>
+                    <AnimateButton type='rotate'>
+                        <IconButton color='inherit' size='large' disableRipple>
                             <IconSettings />
                         </IconButton>
                     </AnimateButton>
@@ -119,7 +109,7 @@ const Customization = () => {
             </Tooltip>
 
             <Drawer
-                anchor="right"
+                anchor='right'
                 onClose={handleToggle}
                 open={open}
                 PaperProps={{
@@ -128,40 +118,40 @@ const Customization = () => {
                     }
                 }}
             >
-                <PerfectScrollbar component="div">
+                <PerfectScrollbar component='div'>
                     <Grid container spacing={gridSpacing} sx={{ p: 3 }}>
                         <Grid item xs={12}>
                             {/* font family */}
-                            <SubCard title="Font Family">
+                            <SubCard title='Font Family'>
                                 <FormControl>
                                     <RadioGroup
-                                        aria-label="font-family"
-                                        value={fontFamily}
-                                        onChange={(e) => setFontFamily(e.target.value)}
-                                        name="row-radio-buttons-group"
+                                        aria-label='font-family'
+                                        value={initialFont}
+                                        onChange={handleFont}
+                                        name='row-radio-buttons-group'
                                     >
                                         <FormControlLabel
-                                            value="Roboto"
+                                            value='Roboto'
                                             control={<Radio />}
-                                            label="Roboto"
+                                            label='Roboto'
                                             sx={{
                                                 '& .MuiSvgIcon-root': { fontSize: 28 },
                                                 '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
                                             }}
                                         />
                                         <FormControlLabel
-                                            value="Poppins"
+                                            value='Poppins'
                                             control={<Radio />}
-                                            label="Poppins"
+                                            label='Poppins'
                                             sx={{
                                                 '& .MuiSvgIcon-root': { fontSize: 28 },
                                                 '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
                                             }}
                                         />
                                         <FormControlLabel
-                                            value="Inter"
+                                            value='Inter'
                                             control={<Radio />}
-                                            label="Inter"
+                                            label='Inter'
                                             sx={{
                                                 '& .MuiSvgIcon-root': { fontSize: 28 },
                                                 '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
@@ -173,26 +163,26 @@ const Customization = () => {
                         </Grid>
                         <Grid item xs={12}>
                             {/* border radius */}
-                            <SubCard title="Border Radius">
-                                <Grid item xs={12} container spacing={2} alignItems="center" sx={{ mt: 2.5 }}>
+                            <SubCard title='Border Radius'>
+                                <Grid item xs={12} container spacing={2} alignItems='center' sx={{ mt: 2.5 }}>
                                     <Grid item>
-                                        <Typography variant="h6" color="secondary">
+                                        <Typography variant='h6' color='secondary'>
                                             4px
                                         </Typography>
                                     </Grid>
                                     <Grid item xs>
                                         <Slider
-                                            size="small"
-                                            value={borderRadius}
+                                            size='small'
+                                            value={appUI.borderRadius}
                                             onChange={handleBorderRadius}
                                             getAriaValueText={valueText}
-                                            valueLabelDisplay="on"
-                                            aria-labelledby="discrete-slider-small-steps"
+                                            valueLabelDisplay='on'
+                                            aria-labelledby='discrete-slider-small-steps'
                                             marks
                                             step={2}
                                             min={4}
                                             max={24}
-                                            color="secondary"
+                                            color='secondary'
                                             sx={{
                                                 '& .MuiSlider-valueLabel': {
                                                     color: 'secondary.light'
@@ -201,7 +191,7 @@ const Customization = () => {
                                         />
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="h6" color="secondary">
+                                        <Typography variant='h6' color='secondary'>
                                             24px
                                         </Typography>
                                     </Grid>

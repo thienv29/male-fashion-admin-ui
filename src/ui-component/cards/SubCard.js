@@ -7,7 +7,17 @@ import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/materia
 
 // ==============================|| CUSTOM SUB CARD ||============================== //
 
-const SubCard = forwardRef(({ children, content, contentClass, darkTitle, secondary, sx = {}, contentSX = {}, title, ...others }, ref) => {
+const SubCard = forwardRef(({
+                                children,
+                                content,
+                                contentClass,
+                                darkTitle,
+                                secondary,
+                                sx = {},
+                                contentSX = {},
+                                title,
+                                ...others
+                            }, ref) => {
     const theme = useTheme();
 
     return (
@@ -24,8 +34,10 @@ const SubCard = forwardRef(({ children, content, contentClass, darkTitle, second
             {...others}
         >
             {/* card header and action */}
-            {!darkTitle && title && <CardHeader sx={{ p: 2.5 }} title={<Typography variant="h5">{title}</Typography>} action={secondary} />}
-            {darkTitle && title && <CardHeader sx={{ p: 2.5 }} title={<Typography variant="h4">{title}</Typography>} action={secondary} />}
+            {!darkTitle && title &&
+                <CardHeader sx={{ p: 2.5 }} title={<Typography variant='h5'>{title}</Typography>} action={secondary} />}
+            {darkTitle && title &&
+                <CardHeader sx={{ p: 2.5 }} title={<Typography variant='h4'>{title}</Typography>} action={secondary} />}
 
             {/* content & header divider */}
             {title && (

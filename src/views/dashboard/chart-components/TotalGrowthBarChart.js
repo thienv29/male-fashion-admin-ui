@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // material-ui
@@ -13,10 +13,10 @@ import Chart from 'react-apexcharts';
 // project imports
 import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowthBarChart';
 import MainCard from 'ui-component/cards/MainCard';
-import { gridSpacing } from 'store/constant';
+import { gridSpacing } from '../../../core/constant/theme';
 
 // chart data
-import chartData from './chart-data/total-growth-bar-chart';
+import chartData from '../chart-data/total-growth-bar-chart';
 
 const status = [
     {
@@ -38,9 +38,9 @@ const status = [
 const TotalGrowthBarChart = ({ isLoading }) => {
     const [value, setValue] = useState('today');
     const theme = useTheme();
-    const customization = useSelector((state) => state.customization);
+    const appUI = useSelector((state) => state.appUI);
 
-    const { navType } = customization;
+    const { navType } = appUI;
     const { primary } = theme.palette.text;
     const darkLight = theme.palette.dark.light;
     const grey200 = theme.palette.grey[200];
@@ -96,20 +96,20 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                 <MainCard>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12}>
-                            <Grid container alignItems="center" justifyContent="space-between">
+                            <Grid container alignItems='center' justifyContent='space-between'>
                                 <Grid item>
-                                    <Grid container direction="column" spacing={1}>
+                                    <Grid container direction='column' spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Total Growth</Typography>
+                                            <Typography variant='subtitle2'>Total Growth</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="h3">$2,324.00</Typography>
+                                            <Typography variant='h3'>$2,324.00</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid item>
                                     <TextField
-                                        id="standard-select-currency"
+                                        id='standard-select-currency'
                                         select
                                         value={value}
                                         onChange={(e) => setValue(e.target.value)}

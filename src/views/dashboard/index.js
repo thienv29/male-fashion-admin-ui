@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 
 // project imports
-import EarningCard from './EarningCard';
-import PopularCard from './PopularCard';
-import TotalOrderLineChartCard from './TotalOrderLineChartCard';
-import TotalIncomeDarkCard from './TotalIncomeDarkCard';
-import TotalIncomeLightCard from './TotalIncomeLightCard';
-import TotalGrowthBarChart from './TotalGrowthBarChart';
-import { gridSpacing } from 'store/constant';
+import EarningCard from './chart-components/EarningCard';
+import PopularCard from './chart-components/PopularCard';
+import TotalOrderLineChartCard from './chart-components/TotalOrderLineChartCard';
+import TotalIncomeDarkCard from './chart-components/TotalIncomeDarkCard';
+import TotalIncomeLightCard from './chart-components/TotalIncomeLightCard';
+import TotalGrowthBarChart from './chart-components/TotalGrowthBarChart';
+import { gridSpacing } from '../../core/constant/theme';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
