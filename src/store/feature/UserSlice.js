@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
-    _id: '',
+    id: '',
     fullName: '',
     firstName: '',
     lastName: '',
     token: '',
-    tokenRefresh: '',
     avatar: '',
+    address: '',
     role: '',
 };
 
@@ -22,26 +22,23 @@ export const UserSlice = createSlice({
 
         setUserLogin: (state, action) => {
             if (action.payload.result && action.payload.result.user) {
-                const { user, accessToken, refreshToken } = action.payload.result;
+                const { user, accessToken } = action.payload.result;
                 state.id = user._id;
                 state.fullName = user.firstName + ' ' + user.lastName;
                 state.firstName = user.firstName;
                 state.lastName = user.lastName;
                 state.token = accessToken;
-                state.tokenRefresh = refreshToken;
                 state.avatar = user.avatar;
+                state.address = user.address;
                 state.role = user.role;
             }
         },
 
         setToken: (state, action) => {
-            state.tokenRefresh = action.payload.newRefreshToken;
             state.token = action.payload.newAccessToken;
         },
 
-        resetUserState: (state) => {
-            state = {...initialState};
-        },
+        resetUserState: (state) => initialState,
 
     },
 });

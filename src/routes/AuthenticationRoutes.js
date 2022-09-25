@@ -22,6 +22,11 @@ const AuthenticationRoutes = {
             path: '/register',
             element: <AuthRegister />
         }
+        ,
+        {
+            path: '*',
+            element: <AuthRegister />
+        }
     ]
 };
 

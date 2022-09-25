@@ -4,7 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 // third party
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
+import { Toaster } from 'react-hot-toast';
 import App from 'App';
 
 // style + assets
@@ -18,10 +18,11 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(
     <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
-        <BrowserRouter basename={config.basename}>
-            <App />
-        </BrowserRouter>
+            <BrowserRouter basename={config.basename}>
+                <App />
+            </BrowserRouter>
         </PersistGate>
+        <Toaster containerClassName={'toast'} />
     </Provider>
 );
 
