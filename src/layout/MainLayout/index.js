@@ -12,11 +12,11 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Customization from '../Customization';
 import navigation from 'menu-items';
-import { drawerWidth } from 'store/constant';
-import { SET_MENU } from 'store/actions';
+import { drawerWidth } from '../../core/constant/theme';
 
 // assets
 import { IconChevronRight } from '@tabler/icons';
+import { setMenu } from '../../store/feature/AppUiSlice';
 
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
@@ -69,14 +69,14 @@ const MainLayout = () => {
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
     // Handle left drawer
-    const leftDrawerOpened = useSelector((state) => state.customization.opened);
+    const leftDrawerOpened = useSelector((state) => state.appUI.opened);
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
-        dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
+        dispatch(setMenu(!leftDrawerOpened));
     };
 
     useEffect(() => {
-        dispatch({ type: SET_MENU, opened: !matchDownMd });
+        dispatch(setMenu(!matchDownMd));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [matchDownMd]);
 
@@ -86,8 +86,8 @@ const MainLayout = () => {
             {/* header */}
             <AppBar
                 enableColorOnDark
-                position="fixed"
-                color="inherit"
+                position='fixed'
+                color='inherit'
                 elevation={0}
                 sx={{
                     bgcolor: theme.palette.background.default,

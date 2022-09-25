@@ -12,7 +12,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import MenuList from './MenuList';
 import LogoSection from '../LogoSection';
 import MenuCard from './MenuCard';
-import { drawerWidth } from 'store/constant';
+import { drawerWidth } from '../../../core/constant/theme';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
@@ -29,7 +29,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
             </Box>
             <BrowserView>
                 <PerfectScrollbar
-                    component="div"
+                    component='div'
                     style={{
                         height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
                         paddingLeft: '16px',
@@ -52,11 +52,12 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const container = window !== undefined ? () => window.document.body : undefined;
 
     return (
-        <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto' }} aria-label="mailbox folders">
+        <Box component='nav' sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto' }}
+             aria-label='mailbox folders'>
             <Drawer
                 container={container}
                 variant={matchUpMd ? 'persistent' : 'temporary'}
-                anchor="left"
+                anchor='left'
                 open={drawerOpen}
                 onClose={drawerToggle}
                 sx={{
@@ -71,7 +72,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     }
                 }}
                 ModalProps={{ keepMounted: true }}
-                color="inherit"
+                color='inherit'
             >
                 {drawer}
             </Drawer>

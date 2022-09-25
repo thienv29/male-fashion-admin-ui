@@ -17,7 +17,7 @@ import { IconChevronDown, IconChevronUp } from '@tabler/icons';
 
 const NavCollapse = ({ menu, level }) => {
     const theme = useTheme();
-    const customization = useSelector((state) => state.customization);
+    const appUI = useSelector((state) => state.appUI);
 
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState(null);
@@ -36,7 +36,7 @@ const NavCollapse = ({ menu, level }) => {
                 return <NavItem key={item.id} item={item} level={level + 1} />;
             default:
                 return (
-                    <Typography key={item.id} variant="h6" color="error" align="center">
+                    <Typography key={item.id} variant='h6' color='error' align='center'>
                         Menu Items Error
                     </Typography>
                 );
@@ -45,7 +45,7 @@ const NavCollapse = ({ menu, level }) => {
 
     const Icon = menu.icon;
     const menuIcon = menu.icon ? (
-        <Icon strokeWidth={1.5} size="1.3rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+        <Icon strokeWidth={1.5} size='1.3rem' style={{ marginTop: 'auto', marginBottom: 'auto' }} />
     ) : (
         <FiberManualRecordIcon
             sx={{
@@ -60,7 +60,7 @@ const NavCollapse = ({ menu, level }) => {
         <>
             <ListItemButton
                 sx={{
-                    borderRadius: `${customization.borderRadius}px`,
+                    borderRadius: `${appUI.borderRadius}px`,
                     mb: 0.5,
                     alignItems: 'flex-start',
                     backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
@@ -73,32 +73,33 @@ const NavCollapse = ({ menu, level }) => {
                 <ListItemIcon sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}>{menuIcon}</ListItemIcon>
                 <ListItemText
                     primary={
-                        <Typography variant={selected === menu.id ? 'h5' : 'body1'} color="inherit" sx={{ my: 'auto' }}>
+                        <Typography variant={selected === menu.id ? 'h5' : 'body1'} color='inherit' sx={{ my: 'auto' }}>
                             {menu.title}
                         </Typography>
                     }
                     secondary={
                         menu.caption && (
-                            <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
+                            <Typography variant='caption' sx={{ ...theme.typography.subMenuCaption }} display='block'
+                                        gutterBottom>
                                 {menu.caption}
                             </Typography>
                         )
                     }
                 />
                 {open ? (
-                    <IconChevronUp stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+                    <IconChevronUp stroke={1.5} size='1rem' style={{ marginTop: 'auto', marginBottom: 'auto' }} />
                 ) : (
-                    <IconChevronDown stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+                    <IconChevronDown stroke={1.5} size='1rem' style={{ marginTop: 'auto', marginBottom: 'auto' }} />
                 )}
             </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={open} timeout='auto' unmountOnExit>
                 <List
-                    component="div"
+                    component='div'
                     disablePadding
                     sx={{
                         position: 'relative',
                         '&:after': {
-                            content: "''",
+                            content: '\'\'',
                             position: 'absolute',
                             left: '32px',
                             top: 0,

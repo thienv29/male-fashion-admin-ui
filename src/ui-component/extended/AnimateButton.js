@@ -55,7 +55,8 @@ const AnimateButton = forwardRef(({ children, type, direction, offset, scale }, 
                 );
             }
             return (
-                <motion.div ref={ref} animate={{ x: x !== undefined ? x : '' }} onHoverEnd={() => cycleX()} onHoverStart={() => cycleX()}>
+                <motion.div ref={ref} animate={{ x: x !== undefined ? x : '' }} onHoverEnd={() => cycleX()}
+                            onHoverStart={() => cycleX()}>
                     {children}
                 </motion.div>
             );

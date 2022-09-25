@@ -15,15 +15,15 @@ import NavigationScroll from 'layout/NavigationScroll';
 // ==============================|| APP ||============================== //
 
 const App = () => {
-    const customization = useSelector((state) => state.customization);
+    const appUI = useSelector((state) => state.appUI);
 
     return (
         <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={themes(customization)}>
+            <ThemeProvider theme={themes(appUI)}>
                 <CssBaseline />
-                <NavigationScroll>
-                    <Routes />
-                </NavigationScroll>
+                    <NavigationScroll>
+                        <Routes />
+                    </NavigationScroll>
             </ThemeProvider>
         </StyledEngineProvider>
     );
