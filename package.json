@@ -1,5 +1,5 @@
 {
-  "name": "berry-material-react-free",
+  "name": "male-fashion",
   "version": "3.2.0",
   "private": true,
   "dependencies": {
@@ -38,7 +38,7 @@
   },
   "scripts": {
     "dev": "env-cmd -f ./enviroments/.env.dev react-scripts start",
-    "prod": "env-cmd -f .env.prod react-scripts start",
+    "prod": "env-cmd -f ./enviroments/.env.prod react-scripts start",
     "build-dev": "env-cmd -f ./enviroments/.env.dev react-scripts build",
     "build-prod": "env-cmd -f .env.prod react-scripts build",
     "build": "env-cmd -f ./enviroments/.env.prod react-scripts build",
