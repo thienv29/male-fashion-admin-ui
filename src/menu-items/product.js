@@ -1,15 +1,4 @@
-// assets
-import { IconPalette, IconTypography, IconArchive, IconRuler } from '@tabler/icons';
-
-// constant
-const icons = {
-    IconTypography,
-    IconPalette,
-    IconRuler,
-    IconArchive
-};
-
-// ==============================|| UTILITIES MENU ITEMS ||============================== //
+import { IconCategory, IconPalette, IconRuler, IconShirt } from '@tabler/icons';
 
 const product = {
     id: 'product',
@@ -21,7 +10,7 @@ const product = {
             title: 'Sản phẩm chính',
             type: 'item',
             url: 'product',
-            icon: icons.IconArchive,
+            icon: IconShirt,
             breadcrumbs: false
         },
         {
@@ -29,7 +18,7 @@ const product = {
             title: 'Màu sắc',
             type: 'item',
             url: 'product/color',
-            icon: icons.IconPalette,
+            icon: IconPalette,
             breadcrumbs: false
         },
         {
@@ -37,7 +26,15 @@ const product = {
             title: 'Size',
             type: 'item',
             url: 'product/size',
-            icon: icons.IconRuler,
+            icon: IconRuler,
+            breadcrumbs: false
+        },
+        {
+            id: 'category',
+            title: 'Loại sản phẩm',
+            type: 'item',
+            url: 'product/category',
+            icon: IconCategory,
             breadcrumbs: false
         }
     ]

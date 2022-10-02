@@ -4,13 +4,14 @@ import config from 'config';
 const initialState = {
 
     theme: 'light',
-    title: 'Dormitory management',
+    title: 'ShirtShop management',
     isOpen: [], // for active default menu
     fontFamily: config.fontFamily,
     borderRadius: config.borderRadius,
     // fontFamily: `'Roboto', sans-serif`,
     // borderRadius: 12,
-    opened: true
+    opened: true,
+    titleForm: ''
 
 };
 
@@ -30,6 +31,9 @@ export const AppUiSlice = createSlice({
             state.borderRadius = action.payload;
         },
 
+        setTitleForm: (state, action) => {
+            state.titleForm = action.payload;
+        },
 
         setFontFamily: (state, action) => {
             state.fontFamily = action.payload;
@@ -38,10 +42,10 @@ export const AppUiSlice = createSlice({
 
         setTitlePage: (state, action) => {
             document.title = action.payload;
-        },
+        }
 
 
-    },
+    }
 });
 
 // Action creators are generated for each case reducer function
@@ -51,6 +55,7 @@ export const {
     setBorderRadius,
     setFontFamily,
     setTitlePage,
+    setTitleForm
 } = AppUiSlice.actions;
 
 export default AppUiSlice.reducer;

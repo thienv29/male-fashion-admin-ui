@@ -190,7 +190,7 @@ const NotificationList = () => {
                         <Grid container>
                             <Grid item>
                                 <Button variant='contained' disableElevation
-                                    endIcon={<IconBrandTelegram stroke={1.5} size='1.3rem' />}>
+                                        endIcon={<IconBrandTelegram stroke={1.5} size='1.3rem' />}>
                                     Mail
                                 </Button>
                             </Grid>

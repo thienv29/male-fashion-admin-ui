@@ -9,7 +9,7 @@ const initialState = {
     token: '',
     avatar: '',
     address: '',
-    role: '',
+    role: ''
 };
 
 export const UserSlice = createSlice({
@@ -38,9 +38,9 @@ export const UserSlice = createSlice({
             state.token = action.payload.newAccessToken;
         },
 
-        resetUserState: (state) => initialState,
+        resetUserState: (state) => initialState
 
-    },
+    }
 });
 
 // Action creators are generated for each case reducer function

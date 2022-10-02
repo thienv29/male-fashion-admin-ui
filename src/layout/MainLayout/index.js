@@ -85,8 +85,7 @@ const MainLayout = () => {
 
     useEffect(() => {
         dispatch(setMenu(!matchDownMd));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [matchDownMd]);
+    }, [matchDownMd, dispatch]);
 
     return (
         <Box sx={{ display: 'flex' }}>

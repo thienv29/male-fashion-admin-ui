@@ -1,4 +1,4 @@
-import axiosClient from './index';
+import axiosClient from './base';
 
 const UserService = {
     getAll: () => {
@@ -10,7 +10,7 @@ const UserService = {
 
     getById: (id) => {
         return axiosClient.get(`/user/get/${id}`);
-    },
+    }
 
 };
 export default UserService;

@@ -82,7 +82,6 @@ const TotalGrowthBarChart = ({ isLoading }) => {
             }
         };
 
-        // do not load chart when loading
         if (!isLoading) {
             ApexCharts.exec(`bar-chart`, 'updateOptions', newChartData);
         }

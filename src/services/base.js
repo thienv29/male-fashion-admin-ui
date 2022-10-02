@@ -9,10 +9,10 @@ import { notifyErrorMessage, notifyErrorSystem, notifySuccessMessage } from '../
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
-        'content-type': 'application/json',
+        'content-type': 'application/json'
     },
     withCredentials: true,
-    paramsSerializer: params => querystring.stringify(params),
+    paramsSerializer: params => querystring.stringify(params)
 });
 
 

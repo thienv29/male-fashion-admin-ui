@@ -1,21 +1,22 @@
 import { lazy } from 'react';
-
-// project imports
 import Loadable from 'ui-component/Loadable';
 import MinimalLayout from 'layout/MinimalLayout';
 
-// login option 3 routing
 const AuthLogin = Loadable(lazy(() => import('views/auth/authentication/Login')));
+const Notfound = Loadable(lazy(() => import('views/404')));
 
-// ==============================|| AUTHENTICATION ROUTING ||============================== //
 
 const AuthenticationRoutes = {
     path: '/',
     element: <MinimalLayout />,
     children: [
         {
-            path: '/login',
+            path: '/403',
             element: <AuthLogin />
+        },
+        {
+            path: '*',
+            element: <Notfound />
         }
     ]
 };

@@ -14,7 +14,7 @@ import {
     InputLabel,
     OutlinedInput,
     Stack,
-    Typography,
+    Typography
 } from '@mui/material';
 
 // third party
@@ -41,7 +41,6 @@ const FirebaseLogin = ({ ...others }) => {
     const navigate = useNavigate();
 
     const loginHandler = async (values) => {
-        console.log(values);
         const userResponse = await AuthService.login(values);
         dispatch(setUserLogin(userResponse));
         navigate('/');
@@ -59,7 +58,7 @@ const FirebaseLogin = ({ ...others }) => {
             <Formik
                 initialValues={{
                     email: '',
-                    password: '',
+                    password: ''
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
@@ -70,7 +69,7 @@ const FirebaseLogin = ({ ...others }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)}
-                            sx={{ ...theme.typography.customInput }}>
+                                     sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor='outlined-adornment-email-login'>Email Address / Username</InputLabel>
                             <OutlinedInput
                                 id='outlined-adornment-email-login'
@@ -136,7 +135,7 @@ const FirebaseLogin = ({ ...others }) => {
                                 label='Remember me'
                             />
                             <Typography variant='subtitle1' color='secondary'
-                                sx={{ textDecoration: 'none', cursor: 'pointer' }}>
+                                        sx={{ textDecoration: 'none', cursor: 'pointer' }}>
                                 Forgot Password?
                             </Typography>
                         </Stack>

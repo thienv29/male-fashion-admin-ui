@@ -1,22 +1,16 @@
 import { lazy } from 'react';
-
-// project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 
-// dashboard routing
 const Dashboard = Loadable(lazy(() => import('views/dashboard')));
-
-// utilities routing
-const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialIcons')));
-const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons')));
-
-// sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
-const TestPage = Loadable(lazy(() => import('views/test-page')));
-// ==============================|| MAIN ROUTING ||============================== //
+const ProductMain = Loadable(lazy(() => import('views/product')));
+const Color = Loadable(lazy(() => import('views/color')));
+const Size = Loadable(lazy(() => import('views/size')));
+const Category = Loadable(lazy(() => import('views/category')));
+const Customer = Loadable(lazy(() => import('views/customer')));
+const SaleOrder = Loadable(lazy(() => import('views/sale-order')));
+const BuyOrder = Loadable(lazy(() => import('views/buy-order')));
+const Supplier = Loadable(lazy(() => import('views/supplier')));
 
 const MainRoutes = {
     path: '/',
@@ -27,50 +21,61 @@ const MainRoutes = {
             element: <Dashboard />
         },
         {
-            path: 'utils',
+            path: 'product',
             children: [
                 {
-                    path: 'util-typography',
-                    element: <UtilsTypography />
+                    path: '',
+                    element: <ProductMain />
                 }
             ]
         },
         {
-            path: 'utils',
+            path: 'product',
             children: [
                 {
-                    path: 'util-color',
-                    element: <UtilsColor />
+                    path: 'color',
+                    element: <Color />
                 }
             ]
         },
         {
-            path: 'icons',
+            path: 'product',
             children: [
                 {
-                    path: 'tabler-icons',
-                    element: <UtilsTablerIcons />
+                    path: 'size',
+                    element: <Size />
                 }
             ]
         },
         {
-            path: 'icons',
+            path: 'product',
             children: [
                 {
-                    path: 'material-icons',
-                    element: <UtilsMaterialIcons />
+                    path: 'category',
+                    element: <Category />
                 }
             ]
         },
+
         {
-            path: 'sample-page',
-            element: <SamplePage />
+            path: 'customer',
+            element: <Customer />
+        },
+
+        {
+            path: 'sale-order',
+            element: <SaleOrder />
+        },
+        {
+            path: 'buy-order',
+            element: <BuyOrder />
+        },
+
+        {
+            path: 'supplier',
+            element: <Supplier />
         }
-        ,
-        {
-            path: 'test-page',
-            element: <TestPage />
-        }
+
     ]
 };
 

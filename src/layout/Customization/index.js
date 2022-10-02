@@ -46,7 +46,7 @@ const Customization = () => {
     const handleBorderRadius = (event, newValue) => {
         dispatch(setBorderRadius(newValue));
     };
-    const handleFont= (event, newValue) => {
+    const handleFont = (event, newValue) => {
         let newFont;
         switch (newValue) {
             case 'Inter':

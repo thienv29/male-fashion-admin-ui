@@ -7,7 +7,7 @@ const notifyErrorSystem = () => {
             height: '60px',
             border: '1px solid red'
         },
-        position: 'top-right',
+        position: 'top-right'
     });
 };
 
@@ -18,7 +18,7 @@ const notifyErrorMessage = (message) => {
             borderRadius: '4px',
             border: '1px solid red'
         },
-        position: 'top-right',
+        position: 'top-right'
     });
 };
 const notifySuccessMessage = (message) => {
@@ -27,7 +27,7 @@ const notifySuccessMessage = (message) => {
             borderRadius: '4px',
             border: '1px solid green'
         },
-        position: 'top-right',
+        position: 'top-right'
     });
 };
 
@@ -39,7 +39,7 @@ const notifyErrorMessages = (message) => {
                 borderRadius: '4px',
                 border: '1px solid red'
             },
-            position: 'top-right',
+            position: 'top-right'
         });
     });
 };
@@ -50,7 +50,7 @@ const notifySuccessMessages = (message) => {
                 borderRadius: '4px',
                 border: '1px solid green'
             },
-            position: 'top-right',
+            position: 'top-right'
         });
     });
 };
