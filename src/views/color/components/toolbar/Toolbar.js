@@ -6,13 +6,18 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteManySuccess, setSelected, showAddColor, showUpdateColor } from '../../slice';
+import { deleteManySuccess, setColors, setSelected, showAddColor, showUpdateColor } from '../../slice';
 import ColorService from '../../../../services/color.service';
 
 const EditTable = ({ numSelected }) => {
     const state = useSelector(state => state.color);
     const dispatch = useDispatch();
+    const getColors = async () => {
+        const data = await ColorService.getAll();
+        dispatch(setColors(data.result));
+    };
     const addColor = () => {
         dispatch(showAddColor());
     };
@@ -37,7 +42,7 @@ const EditTable = ({ numSelected }) => {
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
-                <Tooltip title='Delete'>
+                <Tooltip title='Xóa'>
                     <IconButton onClick={deleteColor}>
                         <DeleteIcon />
                     </IconButton>
@@ -46,19 +51,25 @@ const EditTable = ({ numSelected }) => {
         );
     } else if (numSelected > 1) {
         return (
-            <Tooltip title='Delete'>
+            <Tooltip title='Xóa'>
                 <IconButton onClick={deleteColor}>
                     <DeleteIcon />
                 </IconButton>
             </Tooltip>
         );
     } else {
-        return (
-            <Tooltip title='Thêm màu sắc'>
-                <IconButton onClick={addColor}>
-                    <AddIcon />
-                </IconButton>
-            </Tooltip>
+        return (<>
+                <Tooltip title='Tải lại'>
+                    <IconButton onClick={getColors}>
+                        <ReplayIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title='Thêm màu sắc'>
+                    <IconButton onClick={addColor}>
+                        <AddIcon />
+                    </IconButton>
+                </Tooltip>
+        </>
         );
     }
 
