@@ -8,24 +8,24 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteManySuccess, setColors, setSelected, showAddColor, showUpdateColor } from '../../slice';
-import ColorService from '../../../../services/color.service';
+import { deleteManySuccess, setProducts, setSelected, showAddProduct, showUpdateProduct } from '../../slice';
+import ProductService from '../../../../services/product.service';
 
 const EditTable = ({ numSelected }) => {
-    const state = useSelector(state => state.color);
+    const state = useSelector(state => state.product);
     const dispatch = useDispatch();
-    const getColors = async () => {
-        const data = await ColorService.getAll();
-        dispatch(setColors(data.result));
+    const getProducts = async () => {
+        const data = await ProductService.getAll();
+        dispatch(setProducts(data.result));
     };
-    const addColor = () => {
-        dispatch(showAddColor());
+    const addProduct = () => {
+        dispatch(showAddProduct());
     };
-    const updateColor = () => {
-        dispatch(showUpdateColor());
+    const updateProduct = () => {
+        dispatch(showUpdateProduct());
     };
-    const deleteColor = async () => {
-        const data = await ColorService.deleteAll(state.selected);
+    const deleteProduct = async () => {
+        const data = await ProductService.deleteAll(state.selected);
         if (data) {
             dispatch(deleteManySuccess());
             dispatch(setSelected([]));
@@ -37,13 +37,13 @@ const EditTable = ({ numSelected }) => {
     if (numSelected === 1) {
         return (
             <>
-                <Tooltip title='Sửa màu sắc'>
-                    <IconButton onClick={updateColor}>
+                <Tooltip title='Sửa sản phẩm'>
+                    <IconButton onClick={updateProduct}>
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title='Xóa'>
-                    <IconButton onClick={deleteColor}>
+                    <IconButton onClick={deleteProduct}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>
@@ -52,7 +52,7 @@ const EditTable = ({ numSelected }) => {
     } else if (numSelected > 1) {
         return (
             <Tooltip title='Xóa'>
-                <IconButton onClick={deleteColor}>
+                <IconButton onClick={deleteProduct}>
                     <DeleteIcon />
                 </IconButton>
             </Tooltip>
@@ -60,12 +60,12 @@ const EditTable = ({ numSelected }) => {
     } else {
         return (<>
                 <Tooltip title='Tải lại'>
-                    <IconButton onClick={getColors}>
+                    <IconButton onClick={getProducts}>
                         <ReplayIcon />
                     </IconButton>
                 </Tooltip>
-                <Tooltip title='Thêm màu sắc'>
-                    <IconButton onClick={addColor}>
+                <Tooltip title='Thêm sản phẩm'>
+                    <IconButton onClick={addProduct}>
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
@@ -75,7 +75,7 @@ const EditTable = ({ numSelected }) => {
 
 };
 
-const ColorToolbar = (props) => {
+const ProductToolbar = (props) => {
     const { numSelected } = props;
 
     return (
@@ -105,11 +105,11 @@ const ColorToolbar = (props) => {
                     id='tableTitle'
                     component='div'
                 >
-                    Color
+                    Product
                 </Typography>
             )}
             <EditTable numSelected={numSelected} />
         </Toolbar>
     );
 };
-export default ColorToolbar;
+export default ProductToolbar;

@@ -4,6 +4,9 @@ import storage from 'redux-persist/lib/storage';
 import appUIReducer from './feature/AppUiSlice';
 import userReducer from './feature/UserSlice';
 import colorReducer from '../views/color/slice';
+import categoryReducer from '../views/category/slice';
+import sizeReducer from '../views/size/slice';
+import productReducer from '../views/product/slice';
 
 
 const persistConfig = {
@@ -15,7 +18,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
     appUI: appUIReducer,
     user: userReducer,
-    color: colorReducer
+    color: colorReducer,
+    category: categoryReducer,
+    size: sizeReducer,
+    product: productReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -39,8 +39,7 @@ const headCells = [
     }
 ];
 
-
-export default function Color() {
+const Color = () => {
     const state = useSelector(state => state.color);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -79,7 +78,6 @@ export default function Color() {
                 state.selected.slice(selectedIndex + 1)
             );
         }
-
         dispatch(setSelected(newSelected));
     };
 
@@ -191,4 +189,5 @@ export default function Color() {
             <UpdateColor saveCompleteEvent={getColors} />
         </>
     );
-}
+};
+export default Color;

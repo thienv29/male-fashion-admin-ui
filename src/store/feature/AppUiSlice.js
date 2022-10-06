@@ -8,10 +8,8 @@ const initialState = {
     isOpen: [], // for active default menu
     fontFamily: config.fontFamily,
     borderRadius: config.borderRadius,
-    // fontFamily: `'Roboto', sans-serif`,
-    // borderRadius: 12,
     opened: true,
-    titleForm: ''
+    titleForm: '',
 
 };
 

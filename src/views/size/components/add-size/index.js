@@ -5,52 +5,48 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAddColor } from '../../slice';
+import { closeAddSize } from '../../slice';
 import { FormHelperText, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import ColorService from '../../../../services/color.service';
+import SizeService from '../../../../services/size.service';
 
-const AddColor = ({ saveCompleteEvent }) => {
-    const state = useSelector(state => state.color);
+const AddSize = ({ saveCompleteEvent }) => {
+    const state = useSelector(state => state.size);
     const dispatch = useDispatch();
     const handleClose = () => {
-        dispatch(closeAddColor());
+        dispatch(closeAddSize());
     };
-    const handleAddColor = async (values) => {
-        const data = await ColorService.create(values);
+    const handleAddSize = async (values) => {
+        const data = await SizeService.create(values);
         if (data) {
             saveCompleteEvent();
-            dispatch(closeAddColor());
+            dispatch(closeAddSize());
         }
     };
 
     return (
 
-        <Dialog open={state.addColor} onClose={handleClose}>
-            <Typography variant={'h3'} margin={2}>Thêm màu sắc</Typography>
+        <Dialog open={state.addSize} onClose={handleClose}>
+            <Typography variant={'h3'} margin={2}>Thêm size sản phẩm</Typography>
             <Formik
                 initialValues={{
-                    name: '',
-                    code: ''
+                    name: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    name: Yup.string().max(255).required('Vui lòng nhập tên màu'),
-                    code: Yup.string().max(255).required('Vui lòng chọn màu')
+                    name: Yup.string().max(255).required('Vui lòng nhập tên size')
                 })}
-                onSubmit={handleAddColor}
+                onSubmit={handleAddSize}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit}>
                         <DialogContent>
-                            <TextField name={'name'} label='Tên màu' variant='outlined' value={values.name}
+                            <TextField name={'name'} label='Tên size' variant='outlined' value={values.name}
                                        onBlur={handleBlur}
                                        onChange={handleChange} />
-                            <TextField name={'code'} type={'color'} label='Mã' sx={{ width: 50 }} value={values.code}
-                                       onBlur={handleBlur}
-                                       onChange={handleChange} />
+
                             <FormHelperText error>
-                                {errors.name ? errors.name : errors.code}
+                                {errors.name ? errors.name : ''}
                             </FormHelperText>
                         </DialogContent>
                         <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
@@ -65,4 +61,4 @@ const AddColor = ({ saveCompleteEvent }) => {
 
     );
 };
-export default AddColor;
+export default AddSize;

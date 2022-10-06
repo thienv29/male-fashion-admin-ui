@@ -11,18 +11,22 @@ import themes from 'themes';
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
+import RoutesStaff from './routes/RouteStaffRole';
+import RoutesAdmin from './routes/RouteAdminRole';
+import { ROLE } from './core/constant/role';
 
 // ==============================|| APP ||============================== //
 
 const App = () => {
     const appUI = useSelector((state) => state.appUI);
+    const user = useSelector((state) => state.user);
 
     return (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={themes(appUI)}>
                 <CssBaseline />
                 <NavigationScroll>
-                    <Routes />
+                    {user.role === ROLE.ADMIN ? <RoutesAdmin /> : <RoutesStaff/>}
                 </NavigationScroll>
             </ThemeProvider>
         </StyledEngineProvider>
