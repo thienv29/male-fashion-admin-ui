@@ -19,6 +19,7 @@ const UpdateColor = ({ saveCompleteEvent }) => {
     useEffect(() => {
         getColorById();
     }, [state.selected[0]]);
+
     const getColorById = async () => {
         if (state.selected[0]) {
             const data = await ColorService.getById(state.selected[0]);
@@ -63,9 +64,6 @@ const UpdateColor = ({ saveCompleteEvent }) => {
                                            value={values.code}
                                            onBlur={handleBlur}
                                            onChange={handleChange} />
-                                {/*<FormHelperText error >*/}
-                                {/*    {errors.email}*/}
-                                {/*</FormHelperText>*/}
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
                                 <Button onClick={handleClose}>Hủy</Button>

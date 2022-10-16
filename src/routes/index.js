@@ -5,5 +5,5 @@ import MainRoutes from './MainRoutes';
 
 
 export default function ThemeRoutes() {
-        return  useRoutes([MainRoutes, AuthenticationRoutes, Error])
+    return useRoutes([MainRoutes, AuthenticationRoutes, Error]);
 }

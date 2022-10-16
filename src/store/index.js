@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
     color: colorReducer,
     category: categoryReducer,
     size: sizeReducer,
-    product: productReducer,
+    product: productReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

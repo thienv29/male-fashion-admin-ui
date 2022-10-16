@@ -13,9 +13,9 @@ const MenuList = () => {
     const role = useSelector(state => state.user.role);
 
     const navItems = menuItem.items.filter((item) => {
-        if (role === ROLE.STAFF){
+        if (role === ROLE.STAFF) {
             return item.id === 'license';
-        }else{
+        } else {
             return true;
         }
     }).map((item) => {

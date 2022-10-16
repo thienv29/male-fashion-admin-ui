@@ -9,7 +9,7 @@ const initialState = {
     fontFamily: config.fontFamily,
     borderRadius: config.borderRadius,
     opened: true,
-    titleForm: '',
+    titleForm: ''
 
 };
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -9,12 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     closeAddProduct,
     generateProductDetail,
+    setCategorySelected,
     setDataDetail,
+    setListCategory,
     setListColor,
     setListColorSelected,
     setListSize,
     setListSizeSelected,
     setListSupplier,
+    setMainImage,
     setSupplierSelected
 } from '../../slice';
 import {
@@ -32,29 +35,26 @@ import {
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { BADGE_PRODUCT } from '../../../../core/constant/data/bagde-product';
-import SizeService from '../../../../services/size.service';
-import ColorService from '../../../../services/color.service';
 import { Autocomplete } from '@mui/lab';
 import { PhotoCamera } from '@mui/icons-material';
-import SupplierService from '../../../../services/supplier.service';
 import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
+import ProductService from '../../../../services/product.service';
+import PropertiesService from '../../../../services/properties.service';
 
 const AddProduct = ({ saveCompleteEvent }) => {
     const state = useSelector(state => state.product);
     const appUI = useSelector(state => state.appUI);
-    const [mainImage, setMainImage] = useState('');
     const dispatch = useDispatch();
     useEffect(() => {
         getData();
     }, []);
     const getData = async () => {
-        const listSizes = await SizeService.getAll();
-        const listColors = await ColorService.getAll();
-        const listSuppliers = await SupplierService.getAll();
-        dispatch(setListColor(listColors.result));
-        dispatch(setListSize(listSizes.result));
-        dispatch(setListSupplier(listSuppliers.result));
+        const listData = await PropertiesService.getAll();
+        dispatch(setListColor(listData.result.colors || []));
+        dispatch(setListSize(listData.result.sizes || []));
+        dispatch(setListSupplier(listData.result.suppliers || []));
+        dispatch(setListCategory(listData.result.categories || []));
     };
     const handleClose = () => {
         dispatch(closeAddProduct());
@@ -62,16 +62,16 @@ const AddProduct = ({ saveCompleteEvent }) => {
     const handleAddProduct = async (values) => {
         const obj = {
             ...values,
-            image: mainImage,
+            image: state.mainImage,
             supplier: state.supplierSelected,
-            listDetail: state.listProductDetail
+            category: state.categorySelected,
+            listDetails: state.listProductDetail
         };
-        console.log(obj);
-        // const data = await ProductService.create(values);
-        // if (data) {
-        //     saveCompleteEvent();
-        //     dispatch(closeAddProduct());
-        // }
+        const data = await ProductService.create(obj);
+        if (data) {
+            saveCompleteEvent();
+            dispatch(closeAddProduct());
+        }
     };
     const handleChangeColorSelected = (event, value) => {
         dispatch(setListColorSelected(value));
@@ -88,16 +88,16 @@ const AddProduct = ({ saveCompleteEvent }) => {
     };
     const handleChangeMainImage = async (event) => {
         if (!validateSizeImage(event)) return;
-        const base64 = await convertBase64();
-        setMainImage(base64);
+        const base64 = await convertBase64(event.target.files[0]);
+        dispatch(setMainImage(base64));
     };
     const validateSizeImage = (event) => {
-        if (event.target.files[0].size > 300000){
+        if (event.target.files[0].size > 300000) {
             notifyErrorMessage('Dung lượng ảnh quá lớn');
             return false;
         }
         return true;
-    }
+    };
 
 
     return (
@@ -156,7 +156,7 @@ const AddProduct = ({ saveCompleteEvent }) => {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={6}>
+                                <Grid item xs={3}>
                                     <FormControl fullWidth size='small'
                                                  error={Boolean(touched.exportPrice && errors.exportPrice)}
                                     >
@@ -172,7 +172,7 @@ const AddProduct = ({ saveCompleteEvent }) => {
                                         />
                                     </FormControl>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={3}>
                                     <FormControl size='small' fullWidth
                                                  error={Boolean(touched.salePrice && errors.salePrice)}
                                     >
@@ -202,6 +202,26 @@ const AddProduct = ({ saveCompleteEvent }) => {
                                                     value={supplierItm}
                                                 >
                                                     {supplierItm.sortName + ' - ' + supplierItm.phone}
+                                                </MenuItem>
+                                            ))}
+                                            <MenuItem value={''}>Không</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <FormControl size={'small'} fullWidth>
+                                        <InputLabel id='product-category'>Loại sản phẩm</InputLabel>
+                                        <Select
+                                            id='product-category'
+                                            onChange={(evt) => dispatch(setCategorySelected(evt.target.value))}
+                                            input={<OutlinedInput label='Loại sản phẩm' />}
+                                        >
+                                            {state.listCategories.map((categoryItm) => (
+                                                <MenuItem
+                                                    key={categoryItm._id}
+                                                    value={categoryItm}
+                                                >
+                                                    {categoryItm.name}
                                                 </MenuItem>
                                             ))}
                                             <MenuItem value={''}>Không</MenuItem>
@@ -239,7 +259,7 @@ const AddProduct = ({ saveCompleteEvent }) => {
                                     </Grid>
                                     <Grid item xs={6}>
                                         <div style={{
-                                            backgroundImage: `url(${mainImage}`,
+                                            backgroundImage: `url(${state.mainImage}`,
                                             width: '100%',
                                             height: '100%',
                                             backgroundSize: 'cover',
@@ -344,6 +364,7 @@ const AddProduct = ({ saveCompleteEvent }) => {
                                                                 detail,
                                                                 actionType: 'importPrice'
                                                             }))}
+
                                                             endAdornment={<InputAdornment
                                                                 position='end'>$</InputAdornment>}
                                                         />

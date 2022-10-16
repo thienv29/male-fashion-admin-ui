@@ -10,18 +10,23 @@ const initialState = {
     products: [],
     addProduct: false,
     updateProduct: false,
-    updateProductCurrent: {},
+    loading: false,
 
     productCurrent: {},
 
     listSizes: [],
     listColors: [],
     listSuppliers: [],
+    listCategories: [],
     listColorsSelected: [],
     listSizesSelected: [],
-    supplierSelected: [],
+    supplierSelected: null,
+    categorySelected: null,
+    mainImage: '',
 
-    listProductDetail: []
+    listProductDetail: [],
+
+    productFullUpdate: {}
 
 };
 
@@ -62,8 +67,14 @@ export const ProductSlice = createSlice({
         setListSupplier: (state, action) => {
             state.listSuppliers = action.payload;
         },
+        setListCategory: (state, action) => {
+            state.listCategories = action.payload;
+        },
         setSupplierSelected: (state, action) => {
             state.supplierSelected = action.payload;
+        },
+        setCategorySelected: (state, action) => {
+            state.categorySelected = action.payload;
         },
         setListSizeSelected: (state, action) => {
             state.listSizesSelected = action.payload;
@@ -73,6 +84,9 @@ export const ProductSlice = createSlice({
         },
         setListProductDetail: (state, action) => {
             state.listProductDetail = action.payload;
+        },
+        setMainImage: (state, action) => {
+            state.mainImage = action.payload;
         },
         generateProductDetail: (state) => {
             if (!state.listColorsSelected[0]) notifyErrorMessage('Sản phẩm phải có tối thiểu một màu');
@@ -114,7 +128,6 @@ export const ProductSlice = createSlice({
                             item.salePrice = event.target.value;
                             break;
                         case 'image':
-                            console.log(event);
                             item.image = event;
                             break;
 
@@ -130,6 +143,10 @@ export const ProductSlice = createSlice({
             state.orderBy = property;
         },
         showAddProduct: (state) => {
+            state.listProductDetail = [];
+            state.listColorsSelected = [];
+            state.listSizesSelected = [];
+            state.mainImage = '';
             state.addProduct = true;
         },
         closeAddProduct: (state) => {
@@ -143,6 +160,12 @@ export const ProductSlice = createSlice({
         },
         deleteManySuccess: (state) => {
             state.products = state.products.filter(product => !state.selected.includes(product._id));
+        },
+        setProductFullUpdate: (state, action) => {
+            state.productFullUpdate = action.payload;
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         }
 
 
@@ -168,12 +191,17 @@ export const {
     setListSize,
     setListColor,
     setListSupplier,
+    setListCategory,
     setListSizeSelected,
     setListColorSelected,
     setSupplierSelected,
+    setCategorySelected,
     setListProductDetail,
     generateProductDetail,
-    setDataDetail
+    setMainImage,
+    setDataDetail,
+    setProductFullUpdate,
+    setLoading
 } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

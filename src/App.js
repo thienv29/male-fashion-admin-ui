@@ -4,8 +4,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
 // routing
-import Routes from 'routes';
-
 // defaultTheme
 import themes from 'themes';
 
@@ -26,7 +24,7 @@ const App = () => {
             <ThemeProvider theme={themes(appUI)}>
                 <CssBaseline />
                 <NavigationScroll>
-                    {user.role === ROLE.ADMIN ? <RoutesAdmin /> : <RoutesStaff/>}
+                    {user.role === ROLE.ADMIN ? <RoutesAdmin /> : <RoutesStaff />}
                 </NavigationScroll>
             </ThemeProvider>
         </StyledEngineProvider>

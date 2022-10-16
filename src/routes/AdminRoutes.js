@@ -51,7 +51,7 @@ const AdminRoutes = {
                     element: <Category />
                 }
             ]
-        },
+        }
     ]
 };
 

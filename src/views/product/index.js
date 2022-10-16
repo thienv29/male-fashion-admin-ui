@@ -14,7 +14,7 @@ import ProductToolbar from './components/toolbar/Toolbar';
 import ProductTableHead from './components/toolbar/TableHead';
 import ProductService from '../../services/product.service';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestSort, setProducts, setPage, setRowsPerPage, setSelected } from './slice';
+import { requestSort, setPage, setProducts, setRowsPerPage, setSelected } from './slice';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import AddProduct from './components/add-product';
 import UpdateProduct from './components/update-product';
