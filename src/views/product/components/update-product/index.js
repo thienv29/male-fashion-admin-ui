@@ -47,7 +47,7 @@ import PropertiesService from '../../../../services/properties.service';
 import LoadingSpinner from '../../../../ui-component/loading';
 
 const UpdateProduct = ({ saveCompleteEvent }) => {
-    const state = useSelector(state => state.product);
+    const state = useSelector(state => state.product)
     const appUI = useSelector(state => state.appUI);
     const dispatch = useDispatch();
 
