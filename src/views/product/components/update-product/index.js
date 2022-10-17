@@ -54,7 +54,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
     useEffect(() => {
         getData();
         getProductFullById();
-    }, [state.selected[0]]);
+    }, [state.selected[0]])
 
     const getData = async () => {
         const listData = await PropertiesService.getAll();
