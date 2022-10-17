@@ -10,7 +10,7 @@ import App from 'App';
 // style + assets
 import 'assets/scss/style.scss';
 import config from './config';
-
+import { CookiesProvider } from 'react-cookie';
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 const container = document.getElementById('root');
@@ -19,7 +19,9 @@ root.render(
     <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
             <BrowserRouter basename={config.basename}>
-                <App />
+                <CookiesProvider>
+                    <App />
+                </CookiesProvider>
             </BrowserRouter>
         </PersistGate>
         <Toaster containerClassName={'toast'} />

@@ -7,12 +7,12 @@ import { CssBaseline, StyledEngineProvider } from '@mui/material';
 // defaultTheme
 import themes from 'themes';
 
+
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
 import RoutesStaff from './routes/RouteStaffRole';
 import RoutesAdmin from './routes/RouteAdminRole';
 import { ROLE } from './core/constant/role';
-
 // ==============================|| APP ||============================== //
 
 const App = () => {
@@ -28,6 +28,7 @@ const App = () => {
                 </NavigationScroll>
             </ThemeProvider>
         </StyledEngineProvider>
+
     );
 };
 

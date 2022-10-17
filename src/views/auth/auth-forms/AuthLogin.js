@@ -31,7 +31,8 @@ import AuthService from '../../../services/auth.service';
 import { useDispatch } from 'react-redux';
 import { setUserLogin } from '../../../store/feature/UserSlice';
 import { useNavigate } from 'react-router-dom';
-
+import { ROLE } from '../../../core/constant/role'
+import { notifyErrorMessage } from 'core/utils/notify-action';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
@@ -42,6 +43,10 @@ const FirebaseLogin = ({ ...others }) => {
 
     const loginHandler = async (values) => {
         const userResponse = await AuthService.login(values);
+        if ([ROLE.ADMIN, ROLE.STAFF].includes(userResponse.role)) {
+            notifyErrorMessage('Bạn không có quyền đăng nhập vào trang này');
+            return;
+        }
         dispatch(setUserLogin(userResponse));
         navigate('/');
 
@@ -69,7 +74,7 @@ const FirebaseLogin = ({ ...others }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)}
-                                     sx={{ ...theme.typography.customInput }}>
+                            sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor='outlined-adornment-email-login'>Email Address / Username</InputLabel>
                             <OutlinedInput
                                 id='outlined-adornment-email-login'
@@ -135,7 +140,7 @@ const FirebaseLogin = ({ ...others }) => {
                                 label='Remember me'
                             />
                             <Typography variant='subtitle1' color='secondary'
-                                        sx={{ textDecoration: 'none', cursor: 'pointer' }}>
+                                sx={{ textDecoration: 'none', cursor: 'pointer' }}>
                                 Forgot Password?
                             </Typography>
                         </Stack>

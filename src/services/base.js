@@ -5,7 +5,6 @@ import jwt_decode from 'jwt-decode';
 import AuthService from './auth.service.js';
 import { setToken } from '../store/feature/UserSlice';
 import { notifyErrorMessage, notifyErrorSystem, notifySuccessMessage } from '../core/utils/notify-action';
-
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
@@ -45,6 +44,9 @@ axiosClient.interceptors.response.use((response) => {
                 listMessage.forEach(e => {
                     notifyErrorMessage(e);
                 });
+            }
+            if (status == 401){
+                window.location.href('/login');
             }
 
         }

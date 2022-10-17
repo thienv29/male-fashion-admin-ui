@@ -7,6 +7,7 @@ import colorReducer from '../views/color/slice';
 import categoryReducer from '../views/category/slice';
 import sizeReducer from '../views/size/slice';
 import productReducer from '../views/product/slice';
+import customerReducer from '../views/customer/slice';
 
 
 const persistConfig = {
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     color: colorReducer,
     category: categoryReducer,
     size: sizeReducer,
-    product: productReducer
+    product: productReducer,
+    customer: customerReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
