@@ -65,7 +65,7 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
     return (
 
         <Dialog open={state.updateSupplier} onClose={handleClose}>
-            <Typography variant={'h3'} margin={2}>Sửa Nhà cung cấp</Typography>
+            <Typography variant={'h3'} margin={2}>Cập nhật Nhà cung cấp</Typography>
             {!supplierOld ? <LoadingSpinner /> :
                 <Formik
                     initialValues={{
@@ -183,7 +183,7 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
                                 <Button onClick={handleClose}>Hủy</Button>
-                                <Button type={'submit'}>Sửa</Button>
+                                <Button type={'submit'}>Cập nhật</Button>
                             </DialogActions>
                         </form>
                     )}

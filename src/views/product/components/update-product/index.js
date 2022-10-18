@@ -141,7 +141,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
     return (
 
         <Dialog open={state.updateProduct} onClose={handleClose} maxWidth={'md'}>
-            <Typography variant={'h3'} margin={2}>Sửa sản phẩm</Typography>
+            <Typography variant={'h3'} margin={2}>Cập nhật sản phẩm</Typography>
             {state.loading ? <LoadingSpinner /> :
                 <Formik
                     initialValues={{
@@ -476,7 +476,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
                                 <Button onClick={handleClose}>Hủy</Button>
-                                <Button type={'submit'}>Sửa</Button>
+                                <Button type={'submit'}>Cập nhật</Button>
                             </DialogActions>
                         </form>
                     )}

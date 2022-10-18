@@ -1,39 +1,37 @@
 import * as React from 'react';
-import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAddSupplier } from '../../slice';
-import { Avatar, FormHelperText, Grid, IconButton, Typography } from '@mui/material';
+import { closeAddStaff } from '../../slice';
+import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import SupplierService from '../../../../services/supplier.service';
+import StaffService from '../../../../services/staff.service';
 import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
+import { useState } from 'react';
 import { PhotoCamera } from '@mui/icons-material';
 
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-const AddSupplier = ({ saveCompleteEvent }) => {
-    const state = useSelector(state => state.supplier);
+const AddStaff = ({ saveCompleteEvent }) => {
+    const state = useSelector(state => state.staff);
     const [mainImage,setMainImage] = useState('');
     const dispatch = useDispatch();
     const handleClose = () => {
-        dispatch(closeAddSupplier());
+        dispatch(closeAddStaff());
     };
-    const handleAddSupplier = async (values) => {
-        console.log(values);
-        const supplier = {
+    const handleAddStaff = async (values) => {
+        const staff = {
             ...values,
             avatar: mainImage
         }
-        const data = await SupplierService.create(supplier);
+        const data = await StaffService.create(staff);
         if (data) {
             saveCompleteEvent();
-            dispatch(closeAddSupplier());
+            dispatch(closeAddStaff());
         }
     };
     const handleChangeMainImage = async (event) => {
@@ -50,8 +48,8 @@ const AddSupplier = ({ saveCompleteEvent }) => {
     };
     return (
 
-        <Dialog open={state.addSupplier} onClose={handleClose}>
-            <Typography variant={'h3'} margin={2}>Thêm Nhà cung cấp</Typography>
+        <Dialog open={state.addStaff} onClose={handleClose}>
+            <Typography variant={'h3'} margin={2}>Thêm nhân viên</Typography>
             <Formik
                 initialValues={{
                     firstName: '',
@@ -60,13 +58,18 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                     birthday: '2014-02-09',
                     email: '',
                     address: '',
+                    password: ''
                 }}
                 validationSchema={Yup.object().shape({
+                    firstName: Yup.string().max(255).required('Vui lòng nhập name'),
                     lastName: Yup.string().max(255).required('Vui lòng nhập tên'),
-                    phone: Yup.string().max(255).matches(phoneRegExp, 'Số điện thoại không hợp lệ').required('Vui lòng nhập số điện thoại'),
+                    phone: Yup.string().max(255).required('Vui lòng nhập số điện thoại'),
+                    birthday: Yup.date(),
                     email: Yup.string().max(255).required('Vui lòng nhập email'),
+                    address: Yup.string().max(255).required('Vui lòng nhập địa chỉ'),
+                    password: Yup.string()
                 })}
-                onSubmit={handleAddSupplier}
+                onSubmit={handleAddStaff}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit}>
@@ -93,25 +96,19 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField fullWidth
-                                               value={values.lastName}
+                                               value={values.firstName}
                                                onChange={handleChange}
                                                label='Tên'
-                                               name='lastName'
+                                               name='firstName'
                                                size='small'
                                     />
-                                    {touched.lastName && errors.lastName && (
-                                        <FormHelperText error>
-                                            {errors.lastName}
-                                        </FormHelperText>
-                                    )}
-
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField fullWidth
-                                               value={values.firstName}
+                                               value={values.lastName}
                                                onChange={handleChange}
                                                label='Họ'
-                                               name='firstName'
+                                               name='lastName'
                                                size='small'
                                     />
                                 </Grid>
@@ -123,11 +120,6 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                                                name='email'
                                                size='small'
                                     />
-                                    {touched.email && errors.email && (
-                                        <FormHelperText error>
-                                            {errors.email}
-                                        </FormHelperText>
-                                    )}
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField fullWidth
@@ -136,13 +128,7 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                                                label='Số điện thoại'
                                                name='phone'
                                                size='small'
-                                               type='number'
                                     />
-                                    {touched.phone && errors.phone && (
-                                        <FormHelperText error>
-                                            {errors.phone}
-                                        </FormHelperText>
-                                    )}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField fullWidth
@@ -153,7 +139,7 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                                                size='small'
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={6}>
                                     <TextField fullWidth
                                                value={values.birthday}
                                                onChange={handleChange}
@@ -163,7 +149,16 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                                                type={'date'}
                                     />
                                 </Grid>
-
+                                <Grid item xs={6}>
+                                    <TextField fullWidth
+                                               value={values.password}
+                                               onChange={handleChange}
+                                               label='Mật khẩu'
+                                               name='password'
+                                               size='small'
+                                               type={'password'}
+                                    />
+                                </Grid>
                             </Grid>
                         </DialogContent>
                         <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
@@ -178,4 +173,4 @@ const AddSupplier = ({ saveCompleteEvent }) => {
 
     );
 };
-export default AddSupplier;
+export default AddStaff;

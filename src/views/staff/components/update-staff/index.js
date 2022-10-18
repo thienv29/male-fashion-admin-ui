@@ -6,54 +6,54 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAddCustomer, closeUpdateCustomer, setLoading, setSelected, setUpdateCustomer } from '../../slice';
+import { closeAddStaff, closeUpdateStaff, setLoading, setSelected, setUpdateStaff } from '../../slice';
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import CustomerService from '../../../../services/customer.service';
+import StaffService from '../../../../services/staff.service';
 import { PhotoCamera } from '@mui/icons-material';
 import LoadingSpinner from '../../../../ui-component/loading';
 import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
 
-const UpdateCustomer = ({ saveCompleteEvent }) => {
-    const [customerOld,setCustomerOld] = useState(undefined);
-    const state = useSelector(state => state.customer);
+const UpdateStaff = ({ saveCompleteEvent }) => {
+    const [staffOld,setStaffOld] = useState(undefined);
+    const state = useSelector(state => state.staff);
     const dispatch = useDispatch();
     useEffect(() => {
-        getCustomerById();
+        getStaffById();
     }, [state.selected[0]]);
 
-    const getCustomerById = async () => {
+    const getStaffById = async () => {
         if (state.selected[0]) {
-            const data = await CustomerService.getById(state.selected[0]);
+            const data = await StaffService.getById(state.selected[0]);
             if (data.result) {
-                setCustomerOld(data.result);
+                setStaffOld(data.result);
             }else{
-                dispatch(closeUpdateCustomer());
+                dispatch(closeUpdateStaff());
             }
         }
 
     };
     const handleClose = () => {
-        dispatch(closeUpdateCustomer());
+        dispatch(closeUpdateStaff());
     };
-    const handleUpdateCustomer = async (values) => {
-        const customer = {
-            ...customerOld,
+    const handleUpdateStaff = async (values) => {
+        const staff = {
+            ...staffOld,
             ...values,
         }
-        const data = await CustomerService.update(customer);
+        const data = await StaffService.update(staff);
         if (data) {
             saveCompleteEvent();
-            dispatch(closeUpdateCustomer());
+            dispatch(closeUpdateStaff());
             dispatch(setSelected([]));
         }
     };
     const handleChangeMainImage = async (event) => {
         if (!validateSizeImage(event)) return;
         const base64 = await convertBase64(event.target.files[0]);
-        setCustomerOld({...customerOld, avatar: base64});
+        setStaffOld({...staffOld, avatar: base64});
     };
     const validateSizeImage = (event) => {
         if (event.target.files[0].size > 300000) {
@@ -64,17 +64,17 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
     };
     return (
 
-        <Dialog open={state.updateCustomer} onClose={handleClose}>
-            <Typography variant={'h3'} margin={2}>Cập nhật khách hàng</Typography>
-            {!customerOld ? <LoadingSpinner /> :
+        <Dialog open={state.updateStaff} onClose={handleClose}>
+            <Typography variant={'h3'} margin={2}>Cập nhật nhân viên</Typography>
+            {!staffOld ? <LoadingSpinner /> :
                 <Formik
                     initialValues={{
-                        firstName: customerOld.firstName,
-                        lastName: customerOld.lastName,
-                        phone: customerOld.phone,
-                        birthday: customerOld.birthday.split('T')[0],
-                        email: customerOld.email,
-                        address: customerOld.address,
+                        firstName: staffOld.firstName,
+                        lastName: staffOld.lastName,
+                        phone: staffOld.phone,
+                        birthday: staffOld.birthday.split('T')[0],
+                        email: staffOld.email,
+                        address: staffOld.address,
                         password: ''
                     }}
                     validationSchema={Yup.object().shape({
@@ -86,7 +86,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                         address: Yup.string().max(255).required('Vui lòng nhập địa chỉ'),
                         password: Yup.string()
                     })}
-                    onSubmit={handleUpdateCustomer}
+                    onSubmit={handleUpdateStaff}
                 >
                     {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                         <form noValidate onSubmit={handleSubmit}>
@@ -100,7 +100,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                                                    onChange={handleChangeMainImage}
                                                    type='file' />
                                             <Avatar
-                                                src={customerOld.avatar}
+                                                src={staffOld.avatar}
                                                 style={{
                                                     margin: '10px',
                                                     width: '60px',
@@ -193,4 +193,4 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
     );
 
 };
-export default UpdateCustomer;
+export default UpdateStaff;

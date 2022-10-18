@@ -41,7 +41,7 @@ const UpdateCategory = ({ saveCompleteEvent }) => {
         return (
 
             <Dialog open={state.updateCategory} onClose={handleClose}>
-                <Typography variant={'h3'} margin={2}>Sửa loại sản phẩm</Typography>
+                <Typography variant={'h3'} margin={2}>Cập nhật loại sản phẩm</Typography>
                 <Formik
                     initialValues={{
                         name: a.name
@@ -63,7 +63,7 @@ const UpdateCategory = ({ saveCompleteEvent }) => {
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
                                 <Button onClick={handleClose}>Hủy</Button>
-                                <Button type={'submit'}>Sửa</Button>
+                                <Button type={'submit'}>Cập nhật</Button>
                             </DialogActions>
                         </form>
                     )}

@@ -176,7 +176,7 @@ const AddProduct = ({ saveCompleteEvent }) => {
                                     <FormControl size='small' fullWidth
                                                  error={Boolean(touched.salePrice && errors.salePrice)}
                                     >
-                                        <InputLabel htmlFor='product-export'>Giá sale</InputLabel>
+                                        <InputLabel htmlFor='product-sale'>Giá sale</InputLabel>
                                         <OutlinedInput
                                             type='number'
                                             value={values.salePrice}

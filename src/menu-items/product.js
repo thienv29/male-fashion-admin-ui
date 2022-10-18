@@ -1,4 +1,4 @@
-import { IconCategory, IconPalette, IconRuler, IconShirt } from '@tabler/icons';
+import { IconCategory, IconPalette, IconRuler, IconShirt, IconGift } from '@tabler/icons';
 
 const product = {
     id: 'product',
@@ -37,6 +37,7 @@ const product = {
             icon: IconCategory,
             breadcrumbs: false
         }
+
     ]
 };
 

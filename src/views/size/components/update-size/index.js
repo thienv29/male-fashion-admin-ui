@@ -41,7 +41,7 @@ const UpdateSize = ({ saveCompleteEvent }) => {
         return (
 
             <Dialog open={state.updateSize} onClose={handleClose}>
-                <Typography variant={'h3'} margin={2}>Sửa size sản phẩm</Typography>
+                <Typography variant={'h3'} margin={2}>Cập nhật size sản phẩm</Typography>
                 <Formik
                     initialValues={{
                         name: a.name
@@ -63,7 +63,7 @@ const UpdateSize = ({ saveCompleteEvent }) => {
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
                                 <Button onClick={handleClose}>Hủy</Button>
-                                <Button type={'submit'}>Sửa</Button>
+                                <Button type={'submit'}>Cập nhật</Button>
                             </DialogActions>
                         </form>
                     )}

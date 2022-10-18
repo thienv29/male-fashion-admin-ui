@@ -8,24 +8,24 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteManySuccess, setColors, setSelected, showAddColor, showUpdateColor } from '../../slice';
-import ColorService from '../../../../services/color.service';
+import { deleteManySuccess, setSelected, setVouchers, showAddVoucher, showUpdateVoucher } from '../../slice';
+import VoucherService from '../../../../services/voucher.service';
 
 const EditTable = ({ numSelected }) => {
-    const state = useSelector(state => state.color);
+    const state = useSelector(state => state.voucher);
     const dispatch = useDispatch();
-    const getColors = async () => {
-        const data = await ColorService.getAll();
-        dispatch(setColors(data.result));
+    const getVouchers = async () => {
+        const data = await VoucherService.getAll();
+        dispatch(setVouchers(data.result));
     };
-    const addColor = () => {
-        dispatch(showAddColor());
+    const addVoucher = () => {
+        dispatch(showAddVoucher());
     };
-    const updateColor = () => {
-        dispatch(showUpdateColor());
+    const updateVoucher = () => {
+        dispatch(showUpdateVoucher());
     };
-    const deleteColor = async () => {
-        const data = await ColorService.deleteAll(state.selected);
+    const deleteVoucher = async () => {
+        const data = await VoucherService.deleteAll(state.selected);
         if (data) {
             dispatch(deleteManySuccess());
             dispatch(setSelected([]));
@@ -37,13 +37,13 @@ const EditTable = ({ numSelected }) => {
     if (numSelected === 1) {
         return (
             <>
-                <Tooltip title='Cập nhật màu sắc'>
-                    <IconButton onClick={updateColor}>
+                <Tooltip title='Cập nhật voucher sản phẩm'>
+                    <IconButton onClick={updateVoucher}>
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title='Xóa'>
-                    <IconButton onClick={deleteColor}>
+                    <IconButton onClick={deleteVoucher}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>
@@ -52,7 +52,7 @@ const EditTable = ({ numSelected }) => {
     } else if (numSelected > 1) {
         return (
             <Tooltip title='Xóa'>
-                <IconButton onClick={deleteColor}>
+                <IconButton onClick={deleteVoucher}>
                     <DeleteIcon />
                 </IconButton>
             </Tooltip>
@@ -60,12 +60,12 @@ const EditTable = ({ numSelected }) => {
     } else {
         return (<>
                 <Tooltip title='Tải lại'>
-                    <IconButton onClick={getColors}>
+                    <IconButton onClick={getVouchers}>
                         <ReplayIcon />
                     </IconButton>
                 </Tooltip>
-                <Tooltip title='Thêm màu sắc'>
-                    <IconButton onClick={addColor}>
+                <Tooltip title='Thêm voucher sản phẩm'>
+                    <IconButton onClick={addVoucher}>
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
@@ -75,7 +75,7 @@ const EditTable = ({ numSelected }) => {
 
 };
 
-const ColorToolbar = (props) => {
+const VoucherToolbar = (props) => {
     const { numSelected } = props;
 
     return (
@@ -84,7 +84,7 @@ const ColorToolbar = (props) => {
                 pl: { sm: 2 },
                 pr: { xs: 1, sm: 1 },
                 ...(numSelected > 0 && {
-                    bgcolor: (theme) =>
+                    bgColor: (theme) =>
                         alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity)
                 })
             }}
@@ -92,7 +92,7 @@ const ColorToolbar = (props) => {
             {numSelected > 0 ? (
                 <Typography
                     sx={{ flex: '1 1 100%' }}
-                    color='inherit'
+                    size='inherit'
                     variant='subtitle1'
                     component='div'
                 >
@@ -105,11 +105,11 @@ const ColorToolbar = (props) => {
                     id='tableTitle'
                     component='div'
                 >
-                    Color
+                    Voucher
                 </Typography>
             )}
             <EditTable numSelected={numSelected} />
         </Toolbar>
     );
 };
-export default ColorToolbar;
+export default VoucherToolbar;

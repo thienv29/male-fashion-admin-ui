@@ -37,7 +37,7 @@ const EditTable = ({ numSelected }) => {
     if (numSelected === 1) {
         return (
             <>
-                <Tooltip title='Sửa nhà cung cấp'>
+                <Tooltip title='Cập nhật nhà cung cấp'>
                     <IconButton onClick={updateSupplier}>
                         <EditIcon />
                     </IconButton>

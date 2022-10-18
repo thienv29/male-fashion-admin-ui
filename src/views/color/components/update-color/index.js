@@ -42,7 +42,7 @@ const UpdateColor = ({ saveCompleteEvent }) => {
         return (
 
             <Dialog open={state.updateColor} onClose={handleClose}>
-                <Typography variant={'h3'} margin={2}>Sửa màu sắc</Typography>
+                <Typography variant={'h3'} margin={2}>Cập nhật màu sắc</Typography>
                 <Formik
                     initialValues={{
                         name: a.name,
@@ -67,7 +67,7 @@ const UpdateColor = ({ saveCompleteEvent }) => {
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
                                 <Button onClick={handleClose}>Hủy</Button>
-                                <Button type={'submit'}>Sửa</Button>
+                                <Button type={'submit'}>Cập nhật</Button>
                             </DialogActions>
                         </form>
                     )}
