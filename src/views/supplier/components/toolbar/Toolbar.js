@@ -8,24 +8,24 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteManySuccess, setCustomers, setSelected, showAddCustomer, showUpdateCustomer } from '../../slice';
-import CustomerService from '../../../../services/customer.service';
+import { deleteManySuccess, setSuppliers, setSelected, showAddSupplier, showUpdateSupplier } from '../../slice';
+import SupplierService from '../../../../services/supplier.service';
 
 const EditTable = ({ numSelected }) => {
-    const state = useSelector(state => state.customer);
+    const state = useSelector(state => state.supplier);
     const dispatch = useDispatch();
-    const getCustomers = async () => {
-        const data = await CustomerService.getAll();
-        dispatch(setCustomers(data.result));
+    const getSuppliers = async () => {
+        const data = await SupplierService.getAll();
+        dispatch(setSuppliers(data.result));
     };
-    const addCustomer = () => {
-        dispatch(showAddCustomer());
+    const addSupplier = () => {
+        dispatch(showAddSupplier());
     };
-    const updateCustomer = () => {
-        dispatch(showUpdateCustomer());
+    const updateSupplier = () => {
+        dispatch(showUpdateSupplier());
     };
-    const deleteCustomer = async () => {
-        const data = await CustomerService.deleteAll(state.selected);
+    const deleteSupplier = async () => {
+        const data = await SupplierService.deleteAll(state.selected);
         if (data) {
             dispatch(deleteManySuccess());
             dispatch(setSelected([]));
@@ -37,13 +37,13 @@ const EditTable = ({ numSelected }) => {
     if (numSelected === 1) {
         return (
             <>
-                <Tooltip title='Sửa khách hàng'>
-                    <IconButton onClick={updateCustomer}>
+                <Tooltip title='Sửa nhà cung cấp'>
+                    <IconButton onClick={updateSupplier}>
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title='Xóa'>
-                    <IconButton onClick={deleteCustomer}>
+                    <IconButton onClick={deleteSupplier}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>
@@ -52,7 +52,7 @@ const EditTable = ({ numSelected }) => {
     } else if (numSelected > 1) {
         return (
             <Tooltip title='Xóa'>
-                <IconButton onClick={deleteCustomer}>
+                <IconButton onClick={deleteSupplier}>
                     <DeleteIcon />
                 </IconButton>
             </Tooltip>
@@ -60,12 +60,12 @@ const EditTable = ({ numSelected }) => {
     } else {
         return (<>
                 <Tooltip title='Tải lại'>
-                    <IconButton onClick={getCustomers}>
+                    <IconButton onClick={getSuppliers}>
                         <ReplayIcon />
                     </IconButton>
                 </Tooltip>
-                <Tooltip title='Thêm khách hàng'>
-                    <IconButton onClick={addCustomer}>
+                <Tooltip title='Thêm nhà cung cấp'>
+                    <IconButton onClick={addSupplier}>
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
@@ -75,7 +75,7 @@ const EditTable = ({ numSelected }) => {
 
 };
 
-const CustomerToolbar = (props) => {
+const SupplierToolbar = (props) => {
     const { numSelected } = props;
 
     return (
@@ -105,11 +105,11 @@ const CustomerToolbar = (props) => {
                     id='tableTitle'
                     component='div'
                 >
-                    Customer
+                    Supplier
                 </Typography>
             )}
             <EditTable numSelected={numSelected} />
         </Toolbar>
     );
 };
-export default CustomerToolbar;
+export default SupplierToolbar;

@@ -45,7 +45,7 @@ axiosClient.interceptors.response.use((response) => {
                     notifyErrorMessage(e);
                 });
             }
-            if (status == 401){
+            if (status === 401){
                 window.location.href('/login');
             }
 
