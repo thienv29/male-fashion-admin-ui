@@ -25,7 +25,6 @@ const AddSupplier = ({ saveCompleteEvent }) => {
         dispatch(closeAddSupplier());
     };
     const handleAddSupplier = async (values) => {
-        console.log(values);
         const supplier = {
             ...values,
             avatar: mainImage
@@ -57,7 +56,6 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                     firstName: '',
                     lastName: '',
                     phone: '',
-                    birthday: '2014-02-09',
                     email: '',
                     address: '',
                 }}
@@ -153,16 +151,7 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                                                size='small'
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <TextField fullWidth
-                                               value={values.birthday}
-                                               onChange={handleChange}
-                                               label='Ngày sinh'
-                                               name='birthday'
-                                               size='small'
-                                               type={'date'}
-                                    />
-                                </Grid>
+
 
                             </Grid>
                         </DialogContent>

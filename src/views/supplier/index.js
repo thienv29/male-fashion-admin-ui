@@ -21,12 +21,7 @@ import UpdateSupplier from './components/update-supplier';
 
 
 const headCells = [
-    {
-        id: 'firstName',
-        numberic: false,
-        disablePadding: true,
-        label: 'Họ'
-    },
+
     {
         id: 'lastName',
         numberic: false,
@@ -157,9 +152,6 @@ const Supplier = () => {
                                                                 'aria-labelledby': labelId
                                                             }}
                                                         />
-                                                    </TableCell>
-                                                    <TableCell align={'left'}>
-                                                        {row.firstName}
                                                     </TableCell>
                                                     <TableCell align={'left'}>{row.lastName}</TableCell>
                                                     <TableCell align={'left'}>{row.email}</TableCell>

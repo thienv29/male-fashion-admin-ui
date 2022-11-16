@@ -6,8 +6,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAddSupplier, closeUpdateSupplier, setLoading, setSelected, setUpdateSupplier } from '../../slice';
-import { Avatar, Grid, IconButton, Typography } from '@mui/material';
+import { closeUpdateSupplier, setSelected } from '../../slice';
+import { Avatar, FormHelperText, Grid, IconButton, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import SupplierService from '../../../../services/supplier.service';
@@ -16,8 +16,10 @@ import LoadingSpinner from '../../../../ui-component/loading';
 import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
 
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
 const UpdateSupplier = ({ saveCompleteEvent }) => {
-    const [supplierOld,setSupplierOld] = useState(undefined);
+    const [supplierOld, setSupplierOld] = useState(undefined);
     const state = useSelector(state => state.supplier);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -29,7 +31,7 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
             const data = await SupplierService.getById(state.selected[0]);
             if (data.result) {
                 setSupplierOld(data.result);
-            }else{
+            } else {
                 dispatch(closeUpdateSupplier());
             }
         }
@@ -39,10 +41,12 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
         dispatch(closeUpdateSupplier());
     };
     const handleUpdateSupplier = async (values) => {
+
         const supplier = {
             ...supplierOld,
-            ...values,
-        }
+            ...values
+        };
+
         const data = await SupplierService.update(supplier);
         if (data) {
             saveCompleteEvent();
@@ -53,7 +57,7 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
     const handleChangeMainImage = async (event) => {
         if (!validateSizeImage(event)) return;
         const base64 = await convertBase64(event.target.files[0]);
-        setSupplierOld({...supplierOld, avatar: base64});
+        setSupplierOld({ ...supplierOld, avatar: base64 });
     };
     const validateSizeImage = (event) => {
         if (event.target.files[0].size > 300000) {
@@ -72,19 +76,13 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
                         firstName: supplierOld.firstName,
                         lastName: supplierOld.lastName,
                         phone: supplierOld.phone,
-                        birthday: supplierOld.birthday,
                         email: supplierOld.email,
-                        address: supplierOld.address,
-                        password: ''
+                        address: supplierOld.address
                     }}
                     validationSchema={Yup.object().shape({
-                        firstName: Yup.string().max(255).required('Vui lòng nhập name'),
                         lastName: Yup.string().max(255).required('Vui lòng nhập tên'),
-                        phone: Yup.string().max(255).required('Vui lòng nhập số điện thoại'),
-                        birthday: Yup.date(),
-                        email: Yup.string().max(255).required('Vui lòng nhập email'),
-                        address: Yup.string().max(255).required('Vui lòng nhập địa chỉ'),
-                        password: Yup.string()
+                        phone: Yup.string().max(255).matches(phoneRegExp, 'Số điện thoại không hợp lệ').required('Vui lòng nhập số điện thoại'),
+                        email: Yup.string().max(255).required('Vui lòng nhập email')
                     })}
                     onSubmit={handleUpdateSupplier}
                 >
@@ -113,19 +111,24 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
                                     </Grid>
                                     <Grid item xs={6}>
                                         <TextField fullWidth
-                                                   value={values.firstName}
+                                                   value={values.lastName}
                                                    onChange={handleChange}
                                                    label='Tên'
-                                                   name='firstName'
+                                                   name='lastName'
                                                    size='small'
                                         />
+                                        {touched.lastName && errors.lastName && (
+                                            <FormHelperText error>
+                                                {errors.lastName}
+                                            </FormHelperText>
+                                        )}
                                     </Grid>
                                     <Grid item xs={6}>
                                         <TextField fullWidth
-                                                   value={values.lastName}
+                                                   value={values.firstName}
                                                    onChange={handleChange}
                                                    label='Họ'
-                                                   name='lastName'
+                                                   name='firstName'
                                                    size='small'
                                         />
                                     </Grid>
@@ -136,8 +139,13 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
                                                    label='Email'
                                                    name='email'
                                                    size='small'
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
+                                        {touched.email && errors.email && (
+                                            <FormHelperText error>
+                                                {errors.email}
+                                            </FormHelperText>
+                                        )}
                                     </Grid>
                                     <Grid item xs={6}>
                                         <TextField fullWidth
@@ -146,8 +154,13 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
                                                    label='Số điện thoại'
                                                    name='phone'
                                                    size='small'
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
+                                        {touched.phone && errors.phone && (
+                                            <FormHelperText error>
+                                                {errors.phone}
+                                            </FormHelperText>
+                                        )}
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TextField fullWidth
@@ -158,27 +171,7 @@ const UpdateSupplier = ({ saveCompleteEvent }) => {
                                                    size='small'
                                         />
                                     </Grid>
-                                    <Grid item xs={6}>
-                                        <TextField fullWidth
-                                                   value={values.birthday}
-                                                   onChange={handleChange}
-                                                   label='Ngày sinh'
-                                                   name='birthday'
-                                                   size='small'
-                                                   type={'date'}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <TextField fullWidth
-                                                   value={values.password}
-                                                   onChange={handleChange}
-                                                   label='Mật khẩu'
-                                                   name='password'
-                                                   size='small'
-                                                   type={'password'}
-                                                   autocomplete="off"
-                                        />
-                                    </Grid>
+
                                 </Grid>
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>

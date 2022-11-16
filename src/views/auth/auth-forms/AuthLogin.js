@@ -71,7 +71,7 @@ const FirebaseLogin = ({ ...others }) => {
                 })}
                 onSubmit={loginHandler}
             >
-                {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+                {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (   
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)}
                             sx={{ ...theme.typography.customInput }}>
