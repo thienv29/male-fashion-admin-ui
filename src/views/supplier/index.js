@@ -14,7 +14,7 @@ import SupplierToolbar from './components/toolbar/Toolbar';
 import SupplierTableHead from './components/toolbar/TableHead';
 import SupplierService from '../../services/supplier.service';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestSort, setSuppliers, setPage, setRowsPerPage, setSelected } from './slice';
+import { requestSort, setPage, setRowsPerPage, setSelected, setSuppliers } from './slice';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import AddSupplier from './components/add-supplier';
 import UpdateSupplier from './components/update-supplier';

@@ -47,14 +47,14 @@ import PropertiesService from '../../../../services/properties.service';
 import LoadingSpinner from '../../../../ui-component/loading';
 
 const UpdateProduct = ({ saveCompleteEvent }) => {
-    const state = useSelector(state => state.product)
+    const state = useSelector(state => state.product);
     const appUI = useSelector(state => state.appUI);
     const dispatch = useDispatch();
 
     useEffect(() => {
         getData();
         getProductFullById();
-    }, [state.selected[0]])
+    }, [state.selected[0]]);
 
     const getData = async () => {
         const listData = await PropertiesService.getAll();
@@ -253,7 +253,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                             <Select
                                                 id='product-category'
                                                 onChange={(evt) => dispatch(setCategorySelected(evt.target.value))}
-                                                input={<OutlinedInput label='Loại sản phẩm'  />}
+                                                input={<OutlinedInput label='Loại sản phẩm' />}
                                                 defaultValue={state.productFullUpdate.category}
                                             >
                                                 {state.listCategories.map((categoryItm) => (

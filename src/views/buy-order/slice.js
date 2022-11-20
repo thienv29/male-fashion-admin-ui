@@ -12,7 +12,7 @@ const initialState = {
     loading: false,
     updateBuyOrderCurrent: {},
     listSuppliers: [],
-    supplierSelected: null,
+    supplierSelected: null
 
 };
 

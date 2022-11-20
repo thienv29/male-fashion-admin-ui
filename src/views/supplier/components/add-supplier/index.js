@@ -16,10 +16,10 @@ import { notifyErrorMessage } from '../../../../core/utils/notify-action';
 import { PhotoCamera } from '@mui/icons-material';
 
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const AddSupplier = ({ saveCompleteEvent }) => {
     const state = useSelector(state => state.supplier);
-    const [mainImage,setMainImage] = useState('');
+    const [mainImage, setMainImage] = useState('');
     const dispatch = useDispatch();
     const handleClose = () => {
         dispatch(closeAddSupplier());
@@ -28,7 +28,7 @@ const AddSupplier = ({ saveCompleteEvent }) => {
         const supplier = {
             ...values,
             avatar: mainImage
-        }
+        };
         const data = await SupplierService.create(supplier);
         if (data) {
             saveCompleteEvent();
@@ -57,12 +57,12 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                     lastName: '',
                     phone: '',
                     email: '',
-                    address: '',
+                    address: ''
                 }}
                 validationSchema={Yup.object().shape({
                     lastName: Yup.string().max(255).required('Vui lòng nhập tên'),
                     phone: Yup.string().max(255).matches(phoneRegExp, 'Số điện thoại không hợp lệ').required('Vui lòng nhập số điện thoại'),
-                    email: Yup.string().max(255).required('Vui lòng nhập email'),
+                    email: Yup.string().max(255).required('Vui lòng nhập email')
                 })}
                 onSubmit={handleAddSupplier}
             >
@@ -80,12 +80,12 @@ const AddSupplier = ({ saveCompleteEvent }) => {
                                         <Avatar
                                             src={mainImage}
                                             style={{
-                                                margin: "10px",
-                                                width: "60px",
-                                                height: "60px",
+                                                margin: '10px',
+                                                width: '60px',
+                                                height: '60px'
                                             }}
                                         />
-                                        <PhotoCamera sx={{position:'absolute', bottom: '10px', right: '10px'}}/>
+                                        <PhotoCamera sx={{ position: 'absolute', bottom: '10px', right: '10px' }} />
                                     </IconButton>
 
                                 </Grid>

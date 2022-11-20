@@ -10,7 +10,7 @@ const initialState = {
     updateCustomer: false,
     updateCustomerCurrent: {},
     customers: [],
-    loading: false,
+    loading: false
 
 };
 
@@ -64,7 +64,7 @@ export const CustomerSlice = createSlice({
             state.customers = state.customers.filter(customer => !state.selected.includes(customer._id));
         },
         setLoading: (state, action) => {
-          state.loading = action.payload;
+            state.loading = action.payload;
         }
 
 

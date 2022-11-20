@@ -52,7 +52,7 @@ const UpdateVoucher = ({ saveCompleteEvent }) => {
                         code: voucherOld.code,
                         description: voucherOld.description,
                         condition: voucherOld.condition,
-                        percent:voucherOld.percent,
+                        percent: voucherOld.percent,
                         quantity: voucherOld.quantity,
                         startDate: voucherOld.startDate.split('T')[0],
                         endDate: voucherOld.endDate.split('T')[0]
@@ -181,8 +181,6 @@ const UpdateVoucher = ({ saveCompleteEvent }) => {
                                             </FormHelperText>
                                         )}
                                     </Grid>
-
-
 
 
                                 </Grid>

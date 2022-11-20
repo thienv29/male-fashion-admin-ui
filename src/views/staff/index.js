@@ -14,7 +14,7 @@ import StaffToolbar from './components/toolbar/Toolbar';
 import StaffTableHead from './components/toolbar/TableHead';
 import StaffService from '../../services/staff.service';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestSort, setStaffs, setPage, setRowsPerPage, setSelected } from './slice';
+import { requestSort, setPage, setRowsPerPage, setSelected, setStaffs } from './slice';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import AddStaff from './components/add-staff';
 import UpdateStaff from './components/update-staff';

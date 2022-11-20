@@ -1,4 +1,4 @@
-import { IconCategory, IconPalette, IconRuler, IconShirt, IconGift } from '@tabler/icons';
+import { IconGift } from '@tabler/icons';
 
 const marketing = {
     id: 'marketing',

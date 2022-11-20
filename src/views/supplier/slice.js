@@ -10,7 +10,7 @@ const initialState = {
     updateSupplier: false,
     updateSupplierCurrent: {},
     suppliers: [],
-    loading: false,
+    loading: false
 
 };
 
@@ -64,7 +64,7 @@ export const SupplierSlice = createSlice({
             state.suppliers = state.suppliers.filter(supplier => !state.selected.includes(supplier._id));
         },
         setLoading: (state, action) => {
-          state.loading = action.payload;
+            state.loading = action.payload;
         }
 
 

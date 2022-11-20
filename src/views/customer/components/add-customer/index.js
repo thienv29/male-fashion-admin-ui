@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -12,13 +13,12 @@ import { Formik } from 'formik';
 import CustomerService from '../../../../services/customer.service';
 import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
-import { useState } from 'react';
 import { PhotoCamera } from '@mui/icons-material';
 
 
 const AddCustomer = ({ saveCompleteEvent }) => {
     const state = useSelector(state => state.customer);
-    const [mainImage,setMainImage] = useState('');
+    const [mainImage, setMainImage] = useState('');
     const dispatch = useDispatch();
     const handleClose = () => {
         dispatch(closeAddCustomer());
@@ -27,7 +27,7 @@ const AddCustomer = ({ saveCompleteEvent }) => {
         const customer = {
             ...values,
             avatar: mainImage
-        }
+        };
         const data = await CustomerService.create(customer);
         if (data) {
             saveCompleteEvent();
@@ -85,12 +85,12 @@ const AddCustomer = ({ saveCompleteEvent }) => {
                                         <Avatar
                                             src={mainImage}
                                             style={{
-                                                margin: "10px",
-                                                width: "60px",
-                                                height: "60px",
+                                                margin: '10px',
+                                                width: '60px',
+                                                height: '60px'
                                             }}
                                         />
-                                        <PhotoCamera sx={{position:'absolute', bottom: '10px', right: '10px'}}/>
+                                        <PhotoCamera sx={{ position: 'absolute', bottom: '10px', right: '10px' }} />
                                     </IconButton>
 
                                 </Grid>

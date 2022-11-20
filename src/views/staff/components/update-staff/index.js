@@ -6,7 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAddStaff, closeUpdateStaff, setLoading, setSelected, setUpdateStaff } from '../../slice';
+import { closeUpdateStaff, setSelected } from '../../slice';
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -17,7 +17,7 @@ import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
 
 const UpdateStaff = ({ saveCompleteEvent }) => {
-    const [staffOld,setStaffOld] = useState(undefined);
+    const [staffOld, setStaffOld] = useState(undefined);
     const state = useSelector(state => state.staff);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -29,7 +29,7 @@ const UpdateStaff = ({ saveCompleteEvent }) => {
             const data = await StaffService.getById(state.selected[0]);
             if (data.result) {
                 setStaffOld(data.result);
-            }else{
+            } else {
                 dispatch(closeUpdateStaff());
             }
         }
@@ -41,8 +41,8 @@ const UpdateStaff = ({ saveCompleteEvent }) => {
     const handleUpdateStaff = async (values) => {
         const staff = {
             ...staffOld,
-            ...values,
-        }
+            ...values
+        };
         const data = await StaffService.update(staff);
         if (data) {
             saveCompleteEvent();
@@ -53,7 +53,7 @@ const UpdateStaff = ({ saveCompleteEvent }) => {
     const handleChangeMainImage = async (event) => {
         if (!validateSizeImage(event)) return;
         const base64 = await convertBase64(event.target.files[0]);
-        setStaffOld({...staffOld, avatar: base64});
+        setStaffOld({ ...staffOld, avatar: base64 });
     };
     const validateSizeImage = (event) => {
         if (event.target.files[0].size > 300000) {
@@ -136,7 +136,7 @@ const UpdateStaff = ({ saveCompleteEvent }) => {
                                                    label='Email'
                                                    name='email'
                                                    size='small'
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -146,7 +146,7 @@ const UpdateStaff = ({ saveCompleteEvent }) => {
                                                    label='Số điện thoại'
                                                    name='phone'
                                                    size='small'
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -176,7 +176,7 @@ const UpdateStaff = ({ saveCompleteEvent }) => {
                                                    name='password'
                                                    size='small'
                                                    type={'password'}
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
                                     </Grid>
                                 </Grid>

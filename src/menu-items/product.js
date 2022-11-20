@@ -1,4 +1,4 @@
-import { IconCategory, IconPalette, IconRuler, IconShirt, IconGift } from '@tabler/icons';
+import { IconCategory, IconPalette, IconRuler, IconShirt } from '@tabler/icons';
 
 const product = {
     id: 'product',

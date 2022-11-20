@@ -18,7 +18,7 @@ root.render(
     <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
             <BrowserRouter basename={config.basename}>
-                    <App />
+                <App />
             </BrowserRouter>
         </PersistGate>
         <Toaster containerClassName={'toast'} />

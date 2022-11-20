@@ -19,15 +19,15 @@ const AddBuyOrder = ({ saveCompleteEvent }) => {
 
     useEffect(() => {
         getSupplier();
-    },[])
+    }, []);
     const getSupplier = async () => {
-        dispatch(setLoading(true))
+        dispatch(setLoading(true));
         const data = await SupplierService.getAll();
-        if (data){
-            dispatch(setListSupplier(data.result || []))
-        dispatch(setLoading(false))
+        if (data) {
+            dispatch(setListSupplier(data.result || []));
+            dispatch(setLoading(false));
         }
-    }
+    };
 
     const handleClose = () => {
         dispatch(closeAddBuyOrder());
@@ -119,8 +119,6 @@ const AddBuyOrder = ({ saveCompleteEvent }) => {
                                     <Grid item xs={12}>
                                         <Divider />
                                     </Grid>
-
-
 
 
                                 </Grid>

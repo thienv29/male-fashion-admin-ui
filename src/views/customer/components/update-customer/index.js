@@ -6,7 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAddCustomer, closeUpdateCustomer, setLoading, setSelected, setUpdateCustomer } from '../../slice';
+import { closeUpdateCustomer, setSelected } from '../../slice';
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -17,7 +17,7 @@ import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
 
 const UpdateCustomer = ({ saveCompleteEvent }) => {
-    const [customerOld,setCustomerOld] = useState(undefined);
+    const [customerOld, setCustomerOld] = useState(undefined);
     const state = useSelector(state => state.customer);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -29,7 +29,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
             const data = await CustomerService.getById(state.selected[0]);
             if (data.result) {
                 setCustomerOld(data.result);
-            }else{
+            } else {
                 dispatch(closeUpdateCustomer());
             }
         }
@@ -41,8 +41,8 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
     const handleUpdateCustomer = async (values) => {
         const customer = {
             ...customerOld,
-            ...values,
-        }
+            ...values
+        };
         const data = await CustomerService.update(customer);
         if (data) {
             saveCompleteEvent();
@@ -53,7 +53,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
     const handleChangeMainImage = async (event) => {
         if (!validateSizeImage(event)) return;
         const base64 = await convertBase64(event.target.files[0]);
-        setCustomerOld({...customerOld, avatar: base64});
+        setCustomerOld({ ...customerOld, avatar: base64 });
     };
     const validateSizeImage = (event) => {
         if (event.target.files[0].size > 300000) {
@@ -136,7 +136,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                                                    label='Email'
                                                    name='email'
                                                    size='small'
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -146,7 +146,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                                                    label='Số điện thoại'
                                                    name='phone'
                                                    size='small'
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -176,7 +176,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                                                    name='password'
                                                    size='small'
                                                    type={'password'}
-                                                   autocomplete="off"
+                                                   autocomplete='off'
                                         />
                                     </Grid>
                                 </Grid>

@@ -168,8 +168,6 @@ const AddVoucher = ({ saveCompleteEvent }) => {
                                 </Grid>
 
 
-
-
                             </Grid>
                         </DialogContent>
                         <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>

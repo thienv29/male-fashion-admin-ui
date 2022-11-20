@@ -100,19 +100,19 @@ const Voucher = () => {
 
     const emptyRows =
         state.page > 0 ? Math.max(0, (1 + state.page) * state.rowsPerPage - state.vouchers.length) : 0;
-    const renderSwitch = (item) =>
-    {
+    const renderSwitch = (item) => {
         switch (item.status) {
             case VOUCHER_STATUS.NON_START:
-                return  <Chip label="Chưa bắt đầu" color="primary" />;
+                return <Chip label='Chưa bắt đầu' color='primary' />;
             case VOUCHER_STATUS.HAPPENING:
-                return <Chip label="Đang diễn ra" color="success" />;;
+                return <Chip label='Đang diễn ra' color='success' />;
+                ;
             case VOUCHER_STATUS.OVER:
-                return <Chip label="Đã kết thúc" color="error" />;
+                return <Chip label='Đã kết thúc' color='error' />;
             default:
                 return '';
         }
-    }
+    };
     return (
         <>
             <Box sx={{ width: '100%' }}>

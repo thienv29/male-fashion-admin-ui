@@ -12,7 +12,7 @@ const internal = {
             url: 'staff',
             icon: IconUser,
             breadcrumbs: false
-        },
+        }
 
     ]
 };

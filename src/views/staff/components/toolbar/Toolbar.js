@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteManySuccess, setStaffs, setSelected, showAddStaff, showUpdateStaff } from '../../slice';
+import { deleteManySuccess, setSelected, setStaffs, showAddStaff, showUpdateStaff } from '../../slice';
 import StaffService from '../../../../services/staff.service';
 
 const EditTable = ({ numSelected }) => {

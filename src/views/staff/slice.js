@@ -10,7 +10,7 @@ const initialState = {
     updateStaff: false,
     updateStaffCurrent: {},
     staffs: [],
-    loading: false,
+    loading: false
 
 };
 
@@ -64,7 +64,7 @@ export const StaffSlice = createSlice({
             state.staffs = state.staffs.filter(staff => !state.selected.includes(staff._id));
         },
         setLoading: (state, action) => {
-          state.loading = action.payload;
+            state.loading = action.payload;
         }
 
 

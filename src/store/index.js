@@ -31,7 +31,7 @@ const rootReducer = combineReducers({
     supplier: supplierReducer,
     voucher: voucherReducer,
     staff: staffReducer,
-    buyOrder: buyOrderReducer,
+    buyOrder: buyOrderReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
