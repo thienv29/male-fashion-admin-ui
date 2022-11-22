@@ -17,26 +17,30 @@ import { requestSort, setBuyOrders, setPage, setRowsPerPage, setSelected } from 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import BuyOrderService from '../../services/buy-order.service';
 import AddBuyOrder from './components/add-buy-order';
-import UpdateBuyOrder from './components/update-buy-order';
+import ViewBuyOrder from './components/view-buy-order';
 
 
 const headCells = [
-    {
-        id: 'name',
-        numberic: false,
-        disablePadding: true,
-        label: 'Tên màu'
-    },
+
     {
         id: 'code',
         numberic: false,
         disablePadding: true,
-        label: 'Mã màu'
+        label: 'Mã phiếu nhập'
     },
     {
-        id: 'x',
-        label: ''
-    }
+        id: 'description',
+        numberic: false,
+        disablePadding: true,
+        label: 'Diễn giải'
+    },
+  {
+        id: 'ngày tạo',
+        numberic: false,
+        disablePadding: true,
+        label: 'ngày tạo'
+    },
+
 ];
 
 const BuyOrder = () => {
@@ -150,13 +154,11 @@ const BuyOrder = () => {
                                                         />
                                                     </TableCell>
                                                     <TableCell align={'left'}>
-                                                        {row.name}
+                                                        {row.code}
                                                     </TableCell>
-                                                    <TableCell align={'left'}>{row.code}</TableCell>
-                                                    <TableCell align={'left'}><Box sx={{
-                                                        height: 20, width: 20,
-                                                        backgroundBuyOrder: row.code
-                                                    }} /> </TableCell>
+                                                    <TableCell align={'left'}>{row.description}</TableCell>
+                                                    <TableCell align={'left'}>{row.createdAt.split('T')[0]}</TableCell>
+
                                                 </TableRow>
                                             );
                                         })}
@@ -186,7 +188,7 @@ const BuyOrder = () => {
 
             </Box>
             <AddBuyOrder saveCompleteEvent={getBuyOrders} />
-            <UpdateBuyOrder saveCompleteEvent={getBuyOrders} />
+            <ViewBuyOrder saveCompleteEvent={getBuyOrders} />
         </>
     );
 };

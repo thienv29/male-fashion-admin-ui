@@ -8,7 +8,7 @@ const initialState = {
     rowsPerPage: 5,
     buyOrders: [],
     addBuyOrder: false,
-    updateBuyOrder: false,
+    viewBuyOrder: false,
     loading: false,
     updateBuyOrderCurrent: {},
     listSuppliers: [],
@@ -56,11 +56,11 @@ export const BuyOrderSlice = createSlice({
         closeAddBuyOrder: (state) => {
             state.addBuyOrder = false;
         },
-        showUpdateBuyOrder: (state) => {
-            state.updateBuyOrder = true;
+        showViewBuyOrder: (state) => {
+            state.viewBuyOrder = true;
         },
-        closeUpdateBuyOrder: (state) => {
-            state.updateBuyOrder = false;
+        closeViewBuyOrder: (state) => {
+            state.viewBuyOrder = false;
         },
         deleteManySuccess: (state) => {
             state.buyOrders = state.buyOrders.filter(buyOrder => !state.selected.includes(buyOrder._id));
@@ -92,8 +92,8 @@ export const {
     requestSort,
     showAddBuyOrder,
     closeAddBuyOrder,
-    showUpdateBuyOrder,
-    closeUpdateBuyOrder,
+    showViewBuyOrder,
+    closeViewBuyOrder,
     deleteManySuccess,
     setSupplierSelected,
     setListSupplier,

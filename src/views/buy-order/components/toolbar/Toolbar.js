@@ -5,10 +5,11 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import AddIcon from '@mui/icons-material/Add';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteManySuccess, setBuyOrders, setSelected, showAddBuyOrder, showUpdateBuyOrder } from '../../slice';
+import { deleteManySuccess, setBuyOrders, setSelected, showAddBuyOrder, showViewBuyOrder } from '../../slice';
 import BuyOrderService from '../../../../services/buy-order.service';
 
 const EditTable = ({ numSelected }) => {
@@ -22,7 +23,7 @@ const EditTable = ({ numSelected }) => {
         dispatch(showAddBuyOrder());
     };
     const updateBuyOrder = () => {
-        dispatch(showUpdateBuyOrder());
+        dispatch(showViewBuyOrder());
     };
     const deleteBuyOrder = async () => {
         const data = await BuyOrderService.deleteAll(state.selected);
@@ -37,9 +38,9 @@ const EditTable = ({ numSelected }) => {
     if (numSelected === 1) {
         return (
             <>
-                <Tooltip title='Cập nhật màu sắc'>
+                <Tooltip title='Xem phiếu nhập'>
                     <IconButton onClick={updateBuyOrder}>
-                        <EditIcon />
+                        <RemoveRedEyeIcon />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title='Xóa'>
