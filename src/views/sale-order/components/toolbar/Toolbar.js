@@ -9,24 +9,24 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import AddIcon from '@mui/icons-material/Add';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteManySuccess, setBuyOrders, setSelected, showAddBuyOrder, showViewBuyOrder } from '../../slice';
-import BuyOrderService from '../../../../services/buy-order.service';
+import { deleteManySuccess, setSaleOrders, setSelected, showAddSaleOrder, showViewSaleOrder } from '../../slice';
+import SaleOrderService from '../../../../services/sale-order.service';
 
 const EditTable = ({ numSelected }) => {
-    const state = useSelector(state => state.buyOrder);
+    const state = useSelector(state => state.saleOrder);
     const dispatch = useDispatch();
-    const getBuyOrders = async () => {
-        const data = await BuyOrderService.getAll();
-        dispatch(setBuyOrders(data.result));
+    const getSaleOrders = async () => {
+        const data = await SaleOrderService.getAll();
+        dispatch(setSaleOrders(data.result));
     };
-    const addBuyOrder = () => {
-        dispatch(showAddBuyOrder());
+    const addSaleOrder = () => {
+        dispatch(showAddSaleOrder());
     };
-    const updateBuyOrder = () => {
-        dispatch(showViewBuyOrder());
+    const updateSaleOrder = () => {
+        dispatch(showViewSaleOrder());
     };
-    const deleteBuyOrder = async () => {
-        const data = await BuyOrderService.deleteAll(state.selected);
+    const deleteSaleOrder = async () => {
+        const data = await SaleOrderService.deleteAll(state.selected);
         if (data) {
             dispatch(deleteManySuccess());
             dispatch(setSelected([]));
@@ -39,12 +39,12 @@ const EditTable = ({ numSelected }) => {
         return (
             <>
                 <Tooltip title='Xem phiếu nhập'>
-                    <IconButton onClick={updateBuyOrder}>
+                    <IconButton onClick={updateSaleOrder}>
                         <RemoveRedEyeIcon />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title='Xóa'>
-                    <IconButton onClick={deleteBuyOrder}>
+                    <IconButton onClick={deleteSaleOrder}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>
@@ -53,7 +53,7 @@ const EditTable = ({ numSelected }) => {
     } else if (numSelected > 1) {
         return (
             <Tooltip title='Xóa'>
-                <IconButton onClick={deleteBuyOrder}>
+                <IconButton onClick={deleteSaleOrder}>
                     <DeleteIcon />
                 </IconButton>
             </Tooltip>
@@ -61,12 +61,12 @@ const EditTable = ({ numSelected }) => {
     } else {
         return (<>
                 <Tooltip title='Tải lại'>
-                    <IconButton onClick={getBuyOrders}>
+                    <IconButton onClick={getSaleOrders}>
                         <ReplayIcon />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title='Thêm màu sắc'>
-                    <IconButton onClick={addBuyOrder}>
+                    <IconButton onClick={addSaleOrder}>
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
@@ -76,7 +76,7 @@ const EditTable = ({ numSelected }) => {
 
 };
 
-const BuyOrderToolbar = (props) => {
+const SaleOrderToolbar = (props) => {
     const { numSelected } = props;
 
     return (
@@ -106,11 +106,11 @@ const BuyOrderToolbar = (props) => {
                     id='tableTitle'
                     component='div'
                 >
-                    BuyOrder
+                    SaleOrder
                 </Typography>
             )}
             <EditTable numSelected={numSelected} />
         </Toolbar>
     );
 };
-export default BuyOrderToolbar;
+export default SaleOrderToolbar;

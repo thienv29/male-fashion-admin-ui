@@ -6,18 +6,18 @@ const initialState = {
     selected: [],
     page: 0,
     rowsPerPage: 5,
-    buyOrders: [],
-    addBuyOrder: false,
-    viewBuyOrder: false,
+    saleOrders: [],
+    addSaleOrder: false,
+    viewSaleOrder: false,
     loading: false,
-    updateBuyOrderCurrent: {},
+    updateSaleOrderCurrent: {},
     listSuppliers: [],
     supplierSelected: null
 
 };
 
-export const BuyOrderSlice = createSlice({
-    name: 'BuyOrder',
+export const SaleOrderSlice = createSlice({
+    name: 'SaleOrder',
     initialState,
     reducers: {
         setOrder: (state, action) => {
@@ -35,14 +35,14 @@ export const BuyOrderSlice = createSlice({
         setRowsPerPage: (state, action) => {
             state.rowsPerPage = action.payload;
         },
-        setBuyOrders: (state, action) => {
-            state.buyOrders = action.payload;
+        setSaleOrders: (state, action) => {
+            state.saleOrders = action.payload;
         },
-        setAddBuyOrder: (state, action) => {
-            state.addBuyOrder = action.payload;
+        setAddSaleOrder: (state, action) => {
+            state.addSaleOrder = action.payload;
         },
-        setUpdateBuyOrder: (state, action) => {
-            state.updateBuyOrder = action.payload;
+        setUpdateSaleOrder: (state, action) => {
+            state.updateSaleOrder = action.payload;
         },
         requestSort: (state, action) => {
             const property = action.payload;
@@ -50,20 +50,20 @@ export const BuyOrderSlice = createSlice({
             state.order = isAsc ? 'desc' : 'asc';
             state.orderBy = property;
         },
-        showAddBuyOrder: (state) => {
-            state.addBuyOrder = true;
+        showAddSaleOrder: (state) => {
+            state.addSaleOrder = true;
         },
-        closeAddBuyOrder: (state) => {
-            state.addBuyOrder = false;
+        closeAddSaleOrder: (state) => {
+            state.addSaleOrder = false;
         },
-        showViewBuyOrder: (state) => {
-            state.viewBuyOrder = true;
+        showViewSaleOrder: (state) => {
+            state.viewSaleOrder = true;
         },
-        closeViewBuyOrder: (state) => {
-            state.viewBuyOrder = false;
+        closeViewSaleOrder: (state) => {
+            state.viewSaleOrder = false;
         },
         deleteManySuccess: (state) => {
-            state.buyOrders = state.buyOrders.filter(buyOrder => !state.selected.includes(buyOrder._id));
+            state.saleOrders = state.saleOrders.filter(saleOrder => !state.selected.includes(saleOrder._id));
         },
         setListSupplier: (state, action) => {
             state.listSuppliers = action.payload;
@@ -86,18 +86,18 @@ export const {
     setSelected,
     setPage,
     setRowsPerPage,
-    setBuyOrders,
-    setAddBuyOrder,
-    setUpdateBuyOrder,
+    setSaleOrders,
+    setAddSaleOrder,
+    setUpdateSaleOrder,
     requestSort,
-    showAddBuyOrder,
-    closeAddBuyOrder,
-    showViewBuyOrder,
-    closeViewBuyOrder,
+    showAddSaleOrder,
+    closeAddSaleOrder,
+    showViewSaleOrder,
+    closeViewSaleOrder,
     deleteManySuccess,
     setSupplierSelected,
     setListSupplier,
     setLoading
-} = BuyOrderSlice.actions;
+} = SaleOrderSlice.actions;
 
-export default BuyOrderSlice.reducer;
+export default SaleOrderSlice.reducer;

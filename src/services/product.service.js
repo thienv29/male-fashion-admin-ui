@@ -18,6 +18,12 @@ const ProductService = {
     },
     getById: (id) => {
         return axiosClient.get(`/product/get/${id}`);
+    },
+    getLikeCode: (code) => {
+        return axiosClient.get(`/product/get-like-code/${code}`);
+    },
+    getByCode: (code) => {
+        return axiosClient.get(`/product/get-by-code/${code}`);
     }
 
 };
