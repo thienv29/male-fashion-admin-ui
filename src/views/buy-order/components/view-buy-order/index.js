@@ -20,7 +20,7 @@ import {
 import LoadingSpinner from '../../../../ui-component/loading';
 import BuyOrderService from '../../../../services/buy-order.service';
 
-const ViewBuyOrder = ({ saveCompleteEvent }) => {
+const ViewBuyOrder = () => {
     const [buyOrderFull, setBuyOrderFull] = useState({
         listDetails: []
     });

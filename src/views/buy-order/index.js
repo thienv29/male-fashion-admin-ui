@@ -188,7 +188,7 @@ const BuyOrder = () => {
 
             </Box>
             <AddBuyOrder saveCompleteEvent={getBuyOrders} />
-            <ViewBuyOrder saveCompleteEvent={getBuyOrders} />
+            <ViewBuyOrder  />
         </>
     );
 };

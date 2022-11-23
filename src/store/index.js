@@ -12,6 +12,7 @@ import supplierReducer from '../views/supplier/slice';
 import voucherReducer from '../views/voucher/slice';
 import staffReducer from '../views/staff/slice';
 import buyOrderReducer from '../views/buy-order/slice';
+import saleOrderReducer from '../views/sale-order/slice';
 
 
 const persistConfig = {
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
     supplier: supplierReducer,
     voucher: voucherReducer,
     staff: staffReducer,
-    buyOrder: buyOrderReducer
+    buyOrder: buyOrderReducer,
+    saleOrder: saleOrderReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
