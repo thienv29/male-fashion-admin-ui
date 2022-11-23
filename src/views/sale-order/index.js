@@ -13,12 +13,10 @@ import { getComparator } from '../../core/utils/table';
 import SaleOrderToolbar from './components/toolbar/Toolbar';
 import SaleOrderTableHead from './components/toolbar/TableHead';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestSort, setSaleOrders, setPage, setRowsPerPage, setSelected } from './slice';
+import { requestSort, setPage, setRowsPerPage, setSaleOrders, setSelected } from './slice';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import SaleOrderService from '../../services/sale-order.service';
-import AddSaleOrder from './components/add-sale-order';
 import ViewSaleOrder from './components/view-sale-order';
-import { VOUCHER_STATUS } from '../../core/constant/data/voucher-status';
 import { Chip } from '@mui/material';
 import SALE_ORDER_STATUS from '../../core/constant/sale-order-status';
 
@@ -37,7 +35,7 @@ const headCells = [
         disablePadding: true,
         label: 'Diễn giải'
     },
-  {
+    {
         id: 'ngày tạo',
         numberic: false,
         disablePadding: true,
@@ -54,7 +52,7 @@ const headCells = [
         numberic: false,
         disablePadding: true,
         label: 'Phương thức thanh toán'
-    },
+    }
 
 ];
 
@@ -122,7 +120,7 @@ const SaleOrder = () => {
                 return <Chip label='Đang giao' color='secondary' />;
             case SALE_ORDER_STATUS.COMPLETED:
                 return <Chip label='Đã hoàn thành' color='warning' />;
-                case SALE_ORDER_STATUS.CANCELED:
+            case SALE_ORDER_STATUS.CANCELED:
                 return <Chip label='Đã hủy' color='error' />;
             default:
                 return '';
@@ -220,8 +218,7 @@ const SaleOrder = () => {
                 </Paper>
 
             </Box>
-            <AddSaleOrder saveCompleteEvent={getSaleOrders}  />
-            <ViewSaleOrder saveComplete={getSaleOrders}  />
+            <ViewSaleOrder saveComplete={getSaleOrders} />
         </>
     );
 };
