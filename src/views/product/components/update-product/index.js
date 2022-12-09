@@ -8,9 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     closeUpdateProduct,
-    generateProductDetail,
     setCategorySelected,
-    setDataDetail,
     setListCategory,
     setListColor,
     setListColorSelected,
@@ -38,7 +36,6 @@ import {
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { BADGE_PRODUCT } from '../../../../core/constant/data/bagde-product';
-import { Autocomplete } from '@mui/lab';
 import { PhotoCamera } from '@mui/icons-material';
 import { convertBase64 } from '../../../../core/utils/base64';
 import { notifyErrorMessage } from '../../../../core/utils/notify-action';
@@ -84,6 +81,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
             dispatch(setListSizeSelected(listSize));
             dispatch(setListColorSelected(listColor));
             dispatch(setSupplierSelected(productFull.supplier));
+            console.log(productFull.supplier);
             dispatch(setCategorySelected(productFull.category));
             dispatch(setListProductDetail(productFull.listDetails));
             dispatch(setMainImage(productFull.image));
@@ -111,19 +109,19 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
             dispatch(closeUpdateProduct());
         }
     };
-    const handleChangeColorSelected = (event, value) => {
-        dispatch(setListColorSelected(value));
-        dispatch(generateProductDetail());
-    };
-    const handleChangeSizeSelected = (event, value) => {
-        dispatch(setListSizeSelected(value));
-        dispatch(generateProductDetail());
-    };
-    const handleFileRead = async (event, detail) => {
-        if (!validateSizeImage(event)) return;
-        const base64 = await convertBase64(event.target.files[0]);
-        dispatch(setDataDetail({ event: base64, detail, actionType: 'image' }));
-    };
+    // const handleChangeColorSelected = (event, value) => {
+    //     dispatch(setListColorSelected(value));
+    //     dispatch(generateProductDetail());
+    // };
+    // const handleChangeSizeSelected = (event, value) => {
+    //     dispatch(setListSizeSelected(value));
+    //     dispatch(generateProductDetail());
+    // };
+    // const handleFileRead = async (event, detail) => {
+    //     if (!validateSizeImage(event)) return;
+    //     const base64 = await convertBase64(event.target.files[0]);
+    //     dispatch(setDataDetail({ event: base64, detail, actionType: 'image' }));
+    // };
     const handleChangeMainImage = async (event) => {
         if (!validateSizeImage(event)) return;
         const base64 = await convertBase64(event.target.files[0]);
@@ -233,7 +231,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                 id='product-supplier'
                                                 onChange={(evt) => dispatch(setSupplierSelected(evt.target.value))}
                                                 input={<OutlinedInput label='Nhà cung cấp' />}
-                                                defaultValue={state.productFullUpdate.supplier}
+                                                defaultValue={state.productFullUpdate.supplier._id}
                                             >
                                                 {state.listSuppliers.map((supplierItm) => (
                                                     <MenuItem
@@ -320,7 +318,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                    size='small'
                                         />
                                     </Grid>
-                                    <Grid item xs={6}>
+                                    {/* <Grid item xs={6}>
                                         <Autocomplete
                                             onChange={handleChangeColorSelected}
                                             multiple
@@ -357,7 +355,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                 />
                                             )}
                                         />
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12}>
                                         <Divider />
                                     </Grid>
@@ -377,7 +375,7 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                             <OutlinedInput
                                                                 type='text'
                                                                 value={'SKU: ' + detail.color.name + '-' + detail.size.name}
-                                                                disabled
+                                                                
                                                             />
                                                         </FormControl>
                                                     </Grid>
@@ -386,11 +384,11 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                             <OutlinedInput
                                                                 type='number'
                                                                 value={detail.stock}
-                                                                onChange={(event) => dispatch(setDataDetail({
-                                                                    event,
-                                                                    detail,
-                                                                    actionType: 'stock'
-                                                                }))}
+                                                                // onChange={(event) => dispatch(setDataDetail({
+                                                                //     event,
+                                                                //     detail,
+                                                                //     actionType: 'stock'
+                                                                // }))}
 
                                                             />
                                                         </FormControl>
@@ -400,11 +398,11 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                             <OutlinedInput
                                                                 type='number'
                                                                 value={detail.importPrice}
-                                                                onChange={(event) => dispatch(setDataDetail({
-                                                                    event,
-                                                                    detail,
-                                                                    actionType: 'importPrice'
-                                                                }))}
+                                                                // onChange={(event) => dispatch(setDataDetail({
+                                                                //     event,
+                                                                //     detail,
+                                                                //     actionType: 'importPrice'
+                                                                // }))}
 
                                                                 endAdornment={<InputAdornment
                                                                     position='end'>$</InputAdornment>}
@@ -416,11 +414,11 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                             <OutlinedInput
                                                                 type='number'
                                                                 value={detail.exportPrice}
-                                                                onChange={(event) => dispatch(setDataDetail({
-                                                                    event,
-                                                                    detail,
-                                                                    actionType: 'exportPrice'
-                                                                }))}
+                                                                // onChange={(event) => dispatch(setDataDetail({
+                                                                //     event,
+                                                                //     detail,
+                                                                //     actionType: 'exportPrice'
+                                                                // }))}
                                                                 endAdornment={<InputAdornment
                                                                     position='end'>$</InputAdornment>}
                                                             />
@@ -431,11 +429,11 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                             <OutlinedInput
                                                                 type='number'
                                                                 value={detail.salePrice}
-                                                                onChange={(event) => dispatch(setDataDetail({
-                                                                    event,
-                                                                    detail,
-                                                                    actionType: 'salePrice'
-                                                                }))}
+                                                                // onChange={(event) => dispatch(setDataDetail({
+                                                                //     event,
+                                                                //     detail,
+                                                                //     actionType: 'salePrice'
+                                                                // }))}
                                                                 endAdornment={<InputAdornment
                                                                     position='end'>$</InputAdornment>}
                                                             />
@@ -446,9 +444,9 @@ const UpdateProduct = ({ saveCompleteEvent }) => {
                                                             <IconButton color='primary' aria-label='upload picture'
                                                                         component='label'>
                                                                 <input hidden accept='image/*'
-                                                                       onChange={(evt) => handleFileRead(evt, detail)}
+                                                                    //    onChange={(evt) => handleFileRead(evt, detail)}
                                                                        type='file' />
-                                                                <PhotoCamera />
+                                                                {/* <PhotoCamera /> */}
                                                             </IconButton>
 
                                                         </Grid>

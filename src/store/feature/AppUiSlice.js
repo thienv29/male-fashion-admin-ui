@@ -37,12 +37,9 @@ export const AppUiSlice = createSlice({
             state.fontFamily = action.payload;
         },
 
-
         setTitlePage: (state, action) => {
             document.title = action.payload;
         }
-
-
     }
 });
 
