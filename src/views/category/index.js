@@ -167,7 +167,7 @@ const Category = () => {
                         </PerfectScrollbar>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[5, 10, 25]}
+                        rowsPerPageOptions={[10, 20, 30]}
                         component='div'
                         count={state.categorys.length}
                         rowsPerPage={state.rowsPerPage}

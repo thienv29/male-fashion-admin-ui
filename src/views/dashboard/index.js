@@ -7,22 +7,37 @@ import TotalIncomeDarkCard from './chart-components/TotalIncomeDarkCard';
 import TotalIncomeLightCard from './chart-components/TotalIncomeLightCard';
 import TotalGrowthBarChart from './chart-components/TotalGrowthBarChart';
 import { gridSpacing } from '../../core/constant/theme';
+import BuyOrderService from 'services/buy-order.service';
 
 const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
+    const [totalBuyOrder, setTotalBuyOrder] = useState(0);
+    const [totalOrder, setTotalOrder] = useState(0);
     useEffect(() => {
         setLoading(false);
+        getTotalBuyOrder()
+        getTotalOrder()
     }, []);
+
+
+    const getTotalBuyOrder = async () => {
+      const cc = await BuyOrderService.getTotalBuyOrder()
+      setTotalBuyOrder(cc.result)
+    }
+    const getTotalOrder = async () => {
+        const cc = await BuyOrderService.getTotalOrder()
+        setTotalOrder(cc.result)
+      }
 
     return (
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <EarningCard isLoading={isLoading} />
+                        <EarningCard isLoading={isLoading} totalOrder={totalOrder} totalBuyOrder={totalBuyOrder}/>
                     </Grid>
                     <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <TotalOrderLineChartCard isLoading={isLoading} />
+                        <TotalOrderLineChartCard totalBuyOrder={totalBuyOrder} totalOrder={totalOrder} isLoading={isLoading} />
                     </Grid>
                     <Grid item lg={4} md={12} sm={12} xs={12}>
                         <Grid container spacing={gridSpacing}>

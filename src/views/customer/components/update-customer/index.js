@@ -72,7 +72,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                         firstName: customerOld.firstName,
                         lastName: customerOld.lastName,
                         phone: customerOld.phone,
-                        birthday: customerOld.birthday.split('T')[0],
+                        birthday: customerOld.birthday?.split('T')[0],
                         email: customerOld.email,
                         address: customerOld.address,
                         password: ''
@@ -158,7 +158,7 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                                                    size='small'
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item xs={6}>
                                         <TextField fullWidth
                                                    value={values.birthday}
                                                    onChange={handleChange}
@@ -168,7 +168,17 @@ const UpdateCustomer = ({ saveCompleteEvent }) => {
                                                    type={'date'}
                                         />
                                     </Grid>
-                                   
+                                    <Grid item xs={6}>
+                                        <TextField fullWidth
+                                                   value={values.password}
+                                                   onChange={handleChange}
+                                                   label='Mật khẩu'
+                                                   name='password'
+                                                   size='small'
+                                                   type={'password'}
+                                                   autocomplete='off'
+                                        />
+                                    </Grid>
                                 </Grid>
                             </DialogContent>
                             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>

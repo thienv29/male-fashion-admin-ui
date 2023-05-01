@@ -10,10 +10,9 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteManySuccess, setCustomers, setSelected, showAddCustomer, showUpdateCustomer } from '../../slice';
 import CustomerService from '../../../../services/customer.service';
-import { confirmDelete } from 'core/utils/notify-action';
 
 const EditTable = ({ numSelected }) => {
-    const state = useSelector((state) => state.customer);
+    const state = useSelector(state => state.customer);
     const dispatch = useDispatch();
     const getCustomers = async () => {
         const data = await CustomerService.getAll();
@@ -26,28 +25,24 @@ const EditTable = ({ numSelected }) => {
         dispatch(showUpdateCustomer());
     };
     const deleteCustomer = async () => {
-        let text = 'Xác nhận xóa';
-        if (window.confirm(text) === true) {
-            const data = await CustomerService.deleteAll(state.selected);
-            if (data) {
-                dispatch(deleteManySuccess());
-                dispatch(setSelected([]));
-            }
-        } else {
-            text = 'You canceled!';
-            console.log(text);
+        const data = await CustomerService.deleteAll(state.selected);
+        if (data) {
+            dispatch(deleteManySuccess());
+            dispatch(setSelected([]));
+
         }
+
     };
 
     if (numSelected === 1) {
         return (
             <>
-                <Tooltip title="Cập nhật khách hàng">
+                <Tooltip title='Cập nhật khách hàng'>
                     <IconButton onClick={updateCustomer}>
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
-                <Tooltip title="Xóa">
+                <Tooltip title='Xóa'>
                     <IconButton onClick={deleteCustomer}>
                         <DeleteIcon />
                     </IconButton>
@@ -56,21 +51,20 @@ const EditTable = ({ numSelected }) => {
         );
     } else if (numSelected > 1) {
         return (
-            <Tooltip title="Xóa">
+            <Tooltip title='Xóa'>
                 <IconButton onClick={deleteCustomer}>
                     <DeleteIcon />
                 </IconButton>
             </Tooltip>
         );
     } else {
-        return (
-            <>
-                <Tooltip title="Tải lại">
+        return (<>
+                <Tooltip title='Tải lại'>
                     <IconButton onClick={getCustomers}>
                         <ReplayIcon />
                     </IconButton>
                 </Tooltip>
-                <Tooltip title="Thêm khách hàng">
+                <Tooltip title='Thêm khách hàng'>
                     <IconButton onClick={addCustomer}>
                         <AddIcon />
                     </IconButton>
@@ -78,6 +72,7 @@ const EditTable = ({ numSelected }) => {
             </>
         );
     }
+
 };
 
 const CustomerToolbar = (props) => {
@@ -89,16 +84,27 @@ const CustomerToolbar = (props) => {
                 pl: { sm: 2 },
                 pr: { xs: 1, sm: 1 },
                 ...(numSelected > 0 && {
-                    bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity)
+                    bgcolor: (theme) =>
+                        alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity)
                 })
             }}
         >
             {numSelected > 0 ? (
-                <Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
+                <Typography
+                    sx={{ flex: '1 1 100%' }}
+                    color='inherit'
+                    variant='subtitle1'
+                    component='div'
+                >
                     {numSelected} selected
                 </Typography>
             ) : (
-                <Typography sx={{ flex: '1 1 100%' }} variant="h4" id="tableTitle" component="div">
+                <Typography
+                    sx={{ flex: '1 1 100%' }}
+                    variant='h4'
+                    id='tableTitle'
+                    component='div'
+                >
                     Customer
                 </Typography>
             )}

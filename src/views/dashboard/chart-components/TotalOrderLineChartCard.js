@@ -18,7 +18,10 @@ import ChartDataYear from '../chart-data/total-order-year-line-chart';
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
+import { useEffect } from 'react';
+import BuyOrderService from 'services/buy-order.service';
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
     color: '#fff',
@@ -63,13 +66,29 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
 
-const TotalOrderLineChartCard = ({ isLoading }) => {
+const TotalOrderLineChartCard = ({ isLoading,  totalOrder, totalBuyOrder }) => {
     const theme = useTheme();
 
     const [timeValue, setTimeValue] = useState(false);
+    // const [totalBuyOrder, setTotalBuyOrder] = useState(0);
+    // const [totalOrder, setTotalOrder] = useState(0);
     const handleChangeTime = (event, newValue) => {
         setTimeValue(newValue);
     };
+
+    // useEffect(() => {
+    //     getTotalBuyOrder()
+    //     getTotalOrder()
+    // },[])
+
+    // const getTotalBuyOrder = async () => {
+    //   const cc = await BuyOrderService.getTotalBuyOrder()
+    //   setTotalBuyOrder(cc)
+    // }
+    // const getTotalOrder = async () => {
+    //     const cc = await BuyOrderService.getTotalOrder()
+    //     setTotalOrder(cc)
+    //   }
 
     return (
         <>
@@ -77,46 +96,8 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                 <SkeletonTotalOrderCard />
             ) : (
                 <CardWrapper border={false} content={false}>
-                    <Box sx={{ p: 2.25 }}>
+                    <Box sx={{ p: 5.4}}>
                         <Grid container direction='column'>
-                            <Grid item>
-                                <Grid container justifyContent='space-between'>
-                                    <Grid item>
-                                        <Avatar
-                                            variant='rounded'
-                                            sx={{
-                                                ...theme.typography.commonAvatar,
-                                                ...theme.typography.largeAvatar,
-                                                backgroundColor: theme.palette.primary[800],
-                                                color: '#fff',
-                                                mt: 1
-                                            }}
-                                        >
-                                            <LocalMallOutlinedIcon fontSize='inherit' />
-                                        </Avatar>
-                                    </Grid>
-                                    <Grid item>
-                                        <Button
-                                            disableElevation
-                                            variant={timeValue ? 'contained' : 'text'}
-                                            size='small'
-                                            sx={{ color: 'inherit' }}
-                                            onClick={(e) => handleChangeTime(e, true)}
-                                        >
-                                            Month
-                                        </Button>
-                                        <Button
-                                            disableElevation
-                                            variant={!timeValue ? 'contained' : 'text'}
-                                            size='small'
-                                            sx={{ color: 'inherit' }}
-                                            onClick={(e) => handleChangeTime(e, false)}
-                                        >
-                                            Year
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
                             <Grid item sx={{ mb: 0.75 }}>
                                 <Grid container alignItems='center'>
                                     <Grid item xs={6}>
@@ -140,7 +121,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                                                         mt: 1.75,
                                                         mb: 0.75
                                                     }}>
-                                                        $961
+                                                        {totalBuyOrder} VNĐ
                                                     </Typography>
                                                 )}
                                             </Grid>

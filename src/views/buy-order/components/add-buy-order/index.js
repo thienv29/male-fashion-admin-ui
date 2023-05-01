@@ -357,7 +357,7 @@ const AddBuyOrder = ({ saveCompleteEvent }) => {
                                                             onChange={evt => onChangePrice(index, evt.target.value)}
                                                             value={e.price}
                                                             endAdornment={<InputAdornment
-                                                                position='end'>$</InputAdornment>}
+                                                                position='end'>VNĐ</InputAdornment>}
                                                         />
                                                     </FormControl>
                                                 </Grid>
@@ -369,7 +369,7 @@ const AddBuyOrder = ({ saveCompleteEvent }) => {
                                             </Grid>
                                             <Grid item xs={4}>
                                                 <Typography variant={'h4'} textAlign={'right'}>Tổng
-                                                    cộng: {total}$</Typography>
+                                                    cộng: {total} VNĐ</Typography>
                                             </Grid>
                                         </Grid>
                                         : ''}

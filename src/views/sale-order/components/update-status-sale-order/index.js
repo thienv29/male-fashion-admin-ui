@@ -133,13 +133,14 @@ const UpdateStatusSaleOrder = ({ saleOrderFull, showStatus, closeUpdateStatus, s
                                     <Typography>{step.description}</Typography>
                                     <Box sx={{ mb: 2 }}>
                                         <div>
-                                            {index !== 1 ? <Button
+
+                                            <Button
                                                 variant={'outlined'}
                                                 onClick={handleBack}
                                                 sx={{ mt: 1, mr: 1 }}
                                             >
                                                 {'Quay lại'}
-                                            </Button>: ''}
+                                            </Button>
 
                                         </div>
                                     </Box>
@@ -152,7 +153,7 @@ const UpdateStatusSaleOrder = ({ saleOrderFull, showStatus, closeUpdateStatus, s
             </DialogContent>
             <DialogActions sx={{ justifyContent: 'space-between', marginTop: 2 }}>
                 <Button onClick={closeUpdateStatus}>Hủy</Button>
-                { saleOrderFull.status !== SALE_ORDER_STATUS.COMPLETED ? <Button variant={'contained'} onClick={handleUpdatStatus}>Lưu</Button> : ''}
+                <Button variant={'contained'} onClick={handleUpdatStatus}>Lưu</Button>
             </DialogActions>
         </Dialog>
 

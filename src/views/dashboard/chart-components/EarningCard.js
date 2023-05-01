@@ -10,14 +10,14 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
-import EarningIcon from 'assets/images/icons/earning.svg';
+
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
-
+import EarningCardIcon from '@mui/icons-material/PriceCheckOutlined';
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.dark,
     color: '#fff',
@@ -56,7 +56,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
-const EarningCard = ({ isLoading }) => {
+const EarningCard = ({ isLoading, totalOrder, totalBuyOrder}) => {
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -86,10 +86,11 @@ const EarningCard = ({ isLoading }) => {
                                                 ...theme.typography.commonAvatar,
                                                 ...theme.typography.largeAvatar,
                                                 backgroundColor: theme.palette.secondary[800],
+                                                color: '#fff',
                                                 mt: 1
                                             }}
                                         >
-                                            <img src={EarningIcon} alt='Notification' />
+                                             <EarningCardIcon fontSize='inherit' />
                                         </Avatar>
                                     </Grid>
                                     <Grid item>
@@ -145,7 +146,7 @@ const EarningCard = ({ isLoading }) => {
                                     <Grid item>
                                         <Typography
                                             sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            $500.00
+                                            {totalOrder-totalBuyOrder} VNĐ
                                         </Typography>
                                     </Grid>
                                     <Grid item>

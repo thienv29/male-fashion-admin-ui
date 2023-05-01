@@ -19,6 +19,14 @@ const BuyOrderService = {
     },
     getById: (id) => {
         return axiosClient.get(`/buy-order/get/${id}`);
+    },
+
+    getTotalOrder: () => {
+        return axiosClient.get(`/buy-order/get-total-order`);
+    },
+
+    getTotalBuyOrder: () => {
+        return axiosClient.get(`/buy-order/get-total-buy-order`);
     }
 
 };

@@ -113,7 +113,7 @@ const ViewBuyOrder = () => {
                                         id='product-supplier'
                                         onChange={(evt) => dispatch(setSupplierSelected(evt.target.value))}
                                         input={<OutlinedInput label='Nhà cung cấp' />}
-                                        defaultValue={state.listSuppliers[0]._id}
+                                        defaultValue={state.listSuppliers[0] ?state.listSuppliers[0]._id :null}
                                     >
                                         {state.listSuppliers.map((supplierItm) => (
                                             <MenuItem
